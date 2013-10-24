@@ -1,0 +1,22 @@
+{
+    "name": "getsky/phalcon-autoload-di",
+    "type": "library",
+    "description": "Components for automatic registration services in Dependency Injection",
+    "keywords": [ "framework", "phalcon", "di", "dependency", "injection" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JimmDiGrizli",
+            "email": "getmansk-y@yandex.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "ext-phalcon": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "GetSky\\Phalcon\\AutoloadServices": "src/"
+        }
+    }
+}
