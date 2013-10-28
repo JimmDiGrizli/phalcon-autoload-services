@@ -1,5 +1,5 @@
 {
-    "name": "getsky/phalcon-autoload-di",
+    "name": "getsky/phalcon-autoload-services",
     "type": "library",
     "description": "Components for automatic registration services in Dependency Injection",
     "keywords": [ "framework", "phalcon", "di", "dependency", "injection" ],
@@ -14,6 +14,12 @@
         "php": ">=5.4",
         "ext-phalcon": "*"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.0.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
             "GetSky\\Phalcon\\AutoloadServices": "src/"
