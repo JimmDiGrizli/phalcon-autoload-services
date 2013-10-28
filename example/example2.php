@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '\..\vendor\autoload.php';
 require_once 'RouteProvider.php';
+require_once 'Service.php';
 use GetSky\Phalcon\AutoloadServices\Registrant;
 use Phalcon\Config\Adapter\Ini;
 use \Phalcon\DI\FactoryDefault;
@@ -10,17 +11,17 @@ use \Phalcon\DI\FactoryDefault;
 $di = new FactoryDefault();
 $services = new Ini('services.ini');
 $registrant = new Registrant($services);
-$di->setShared('registrant',$registrant);
+$di->setShared('registrant', $registrant);
 
 $di->get('registrant')->registration();
 
-echo'<pre>';
+echo '<pre>';
 var_dump($di->getService('route'));
 echo '<br/>';
 var_dump($di->getService('request'));
 echo '<br/>';
 var_dump($di->getService('response'));
-echo'</pre>';
+echo '</pre>';
 
 /*
   object(Phalcon\DI\Service)#33 (4) {

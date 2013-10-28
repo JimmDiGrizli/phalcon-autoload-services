@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '\..\vendor\autoload.php';
 require_once 'RouteProvider.php';
+require_once 'Service.php';
 use GetSky\Phalcon\AutoloadServices\Registrant;
 use Phalcon\Config\Adapter\Ini;
 use \Phalcon\DI\FactoryDefault;
