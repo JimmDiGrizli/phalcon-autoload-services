@@ -92,12 +92,11 @@ class Registrant implements InjectionAwareInterface
 
             $link = null;
             $type = 'GetSky\\Phalcon\\AutoloadServices\\Creators\\' .
-                ucfirst (
+                ucfirst(
                     $this->findType($service, $link, $name) . 'Creator'
                 );
 
-            $creator = new $type();
-            $creator->setService($service);
+            $creator = new $type($this->getDI(), $service);
 
             $call = 'set';
             if ($service->get('shared') !== null) {

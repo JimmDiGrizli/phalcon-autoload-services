@@ -1,5 +1,4 @@
 <?php
-use GetSky\Phalcon\AutoloadServices\Provider;
 use Phalcon\Mvc\Router;
 
 class Service
@@ -8,9 +7,15 @@ class Service
 
     protected $service;
 
-    public function __construct($value, $service = null)
-    {
+    protected $route;
+
+    public function __construct(
+        $value,
+        $service = null,
+        Router $route = null
+    ) {
         $this->service = $service;
         $this->value = $value;
+        $this->route = $route;
     }
 }
