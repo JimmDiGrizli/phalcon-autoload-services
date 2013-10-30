@@ -11,6 +11,9 @@ use Phalcon\DiInterface;
 abstract class AbstractCreator
 {
 
+    /**
+     * @var DiInterface Dependency Injectors
+     */
     protected $di;
 
     /**

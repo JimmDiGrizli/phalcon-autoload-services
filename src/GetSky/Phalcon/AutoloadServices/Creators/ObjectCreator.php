@@ -1,12 +1,15 @@
 <?php
 namespace GetSky\Phalcon\AutoloadServices\Creators;
 
-use GetSky\Phalcon\AutoloadServices\Creators\Exception\BadArguments;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException;
+use GetSky\Phalcon\AutoloadServices\Creators\Helpers\ArgumentsHelper;
+use GetSky\Phalcon\AutoloadServices\Creators\Helpers\CallHelper;
 use ReflectionClass;
+use Phalcon\Config;
 
 class ObjectCreator extends AbstractCreator
 {
+
     public function injection()
     {
         $class = $this->getService()->get('object');
@@ -15,37 +18,30 @@ class ObjectCreator extends AbstractCreator
             throw new ClassNotFoundException("{$class} is not not found.");
         }
 
-        $arguments = $this->getService()->get('arg');
-        $array = null;
-        foreach ($arguments as $argument) {
-            foreach ($argument as $name => $value) {
-                switch ($name) {
-                    case 'var':
-                    case 'parameter':
-                        $array[] = $value;
-                        break;
-                    case 'object':
-                    case 'obj':
-                    case 'instance':
-                        $creator = new ObjectCreator($this->di, $value);
-                        $array[] = $creator->injection();
-                        break;
-                    case 'service':
-                        $array[] = $this->di->get($value);
-                        break;
-                    default:
-                        throw new BadArguments(
-                            "Argument type '{$name}' is not supported"
-                        );
-                }
-            }
+        $arguments = null;
+        $argConfig = $this->getService()->get('arg', null);
+        if ($argConfig !== null) {
+            $argHelper = new ArgumentsHelper($this->di, $argConfig);
+            $arguments = $argHelper->preparation();
         }
 
-        if (is_array($array)) {
+        $calls = null;
+        $callHelper = null;
+        $callConfig = $this->getService()->get('call', null);
+        if ($callConfig !== null) {
+            $callHelper = new CallHelper($this->di, $callConfig);
+            $calls = $callHelper->preparation();
+        }
+
+
+        if (is_array($arguments)) {
             $reflector = new ReflectionClass($class);
-            $object = $reflector->newInstanceArgs($array);
+            $object = $reflector->newInstanceArgs($arguments);
         } else {
             $object = new $class;
+            if (is_array($calls) && $callHelper !== null) {
+                $callHelper->ring($object, $calls);
+            }
         }
 
         return $object;

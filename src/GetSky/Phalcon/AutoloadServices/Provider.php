@@ -7,6 +7,7 @@ namespace GetSky\Phalcon\AutoloadServices;
  */
 interface Provider
 {
+
     /**
      * @return callable
      */

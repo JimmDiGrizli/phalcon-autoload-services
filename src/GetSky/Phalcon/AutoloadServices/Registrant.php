@@ -14,6 +14,7 @@ use GetSky\Phalcon\AutoloadServices\Creators\AbstractCreator;
  */
 class Registrant implements InjectionAwareInterface
 {
+
     /**
      * @var DiInterface
      */
