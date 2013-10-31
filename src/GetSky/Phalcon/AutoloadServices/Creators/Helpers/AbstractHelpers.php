@@ -4,6 +4,12 @@ namespace GetSky\Phalcon\AutoloadServices\Creators\Helpers;
 use Phalcon\Config;
 use Phalcon\DiInterface;
 
+/**
+ * Parent class of helpers.
+ *
+ * Class AbstractHelpers
+ * @package GetSky\Phalcon\AutoloadServices\Creators\Helpers
+ */
 abstract class AbstractHelpers
 {
 
@@ -17,6 +23,10 @@ abstract class AbstractHelpers
      */
     protected $config;
 
+    /**
+     * @param DiInterface $di
+     * @param Config $config
+     */
     public function __construct(DiInterface $di, Config $config)
     {
         $this->di = $di;

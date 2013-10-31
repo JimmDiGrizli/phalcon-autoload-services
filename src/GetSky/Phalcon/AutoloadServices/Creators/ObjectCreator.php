@@ -7,9 +7,22 @@ use GetSky\Phalcon\AutoloadServices\Creators\Helpers\CallHelper;
 use ReflectionClass;
 use Phalcon\Config;
 
+/**
+ * Class helps to prepare the object for registration in the dependency
+ * injection. Allows you to create objects with arguments (objects, variables,
+ * services) in the constructor and call methods with arguments (objects,
+ * variables, services) after creation.
+ *
+ * Class ObjectCreator
+ * @package GetSky\Phalcon\AutoloadServices\Creators
+ */
 class ObjectCreator extends AbstractCreator
 {
 
+    /**
+     * @return object
+     * @throws ClassNotFoundException
+     */
     public function injection()
     {
         $class = $this->getService()->get('object');

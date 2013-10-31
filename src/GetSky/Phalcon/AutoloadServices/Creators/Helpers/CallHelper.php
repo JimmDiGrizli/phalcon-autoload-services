@@ -5,6 +5,12 @@ use GetSky\Phalcon\AutoloadServices\Creators\Exception\MethodNotFoundArguments;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ObjectNotFoundArguments;
 use Phalcon\Config;
 
+/**
+ * Helper who makes a call methods of the desired object
+ *
+ * Class CallHelper
+ * @package GetSky\Phalcon\AutoloadServices\Creators\Helpers
+ */
 class CallHelper extends AbstractHelpers
 {
 
@@ -31,7 +37,6 @@ class CallHelper extends AbstractHelpers
 
     public function ring($object, array $calls)
     {
-
         if (!is_object($object)) {
             throw new ObjectNotFoundArguments ("{$object} is not an object ");
         }
