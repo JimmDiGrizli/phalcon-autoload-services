@@ -1,8 +1,8 @@
 <?php
 namespace GetSky\Phalcon\AutoloadServices\Creators\Helpers;
 
-use GetSky\Phalcon\AutoloadServices\Creators\Exception\MethodNotFoundArguments;
-use GetSky\Phalcon\AutoloadServices\Creators\Exception\ObjectNotFoundArguments;
+use GetSky\Phalcon\AutoloadServices\Creators\Exception\MethodNotFoundException;
+use GetSky\Phalcon\AutoloadServices\Creators\Exception\ObjectNotFoundException;
 use Phalcon\Config;
 
 /**
@@ -22,6 +22,10 @@ class CallHelper extends AbstractHelpers
 
         foreach ($calls as $key => $call) {
 
+            if ($call->get('method') === '%off%') {
+                continue;
+            }
+
             $array[$key]['method'] = $call->get('method');
 
             $argConfig = $call->get('arg', null);
@@ -38,13 +42,13 @@ class CallHelper extends AbstractHelpers
     public function ring($object, array $calls)
     {
         if (!is_object($object)) {
-            throw new ObjectNotFoundArguments ("{$object} is not an object ");
+            throw new ObjectNotFoundException ("{$object} is not an object ");
         }
 
         foreach ($calls as $call) {
             if (!method_exists($object, $call['method'])) {
                 $nameClass = get_class($object);
-                throw new MethodNotFoundArguments ("{$call['method']} not
+                throw new MethodNotFoundException ("{$call['method']} not
                 found in class {$nameClass}");
             }
 

@@ -24,6 +24,9 @@ class ArgumentsHelper extends AbstractHelpers
 
         foreach ($arguments as $argument) {
             foreach ($argument as $name => $value) {
+                if ($value === '%off%') {
+                    continue;
+                }
                 switch ($name) {
                     case 'var':
                     case 'parameter':

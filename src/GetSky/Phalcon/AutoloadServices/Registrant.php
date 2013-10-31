@@ -104,7 +104,10 @@ class Registrant implements InjectionAwareInterface
                 $call .= 'Shared';
             }
 
-            $this->getDI()->$call($name, $creator->injection());
+            $service = $creator->injection();
+            if ($service !== null) {
+                $this->getDI()->$call($name, $service);
+            }
         }
     }
 

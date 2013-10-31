@@ -20,12 +20,16 @@ class ObjectCreator extends AbstractCreator
 {
 
     /**
-     * @return object
+     * @return object|null
      * @throws ClassNotFoundException
      */
     public function injection()
     {
         $class = $this->getService()->get('object');
+
+        if ($class === '%off%') {
+            return null;
+        }
 
         if (!class_exists($class)) {
             throw new ClassNotFoundException("{$class} is not not found.");

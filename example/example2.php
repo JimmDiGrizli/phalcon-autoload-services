@@ -22,32 +22,37 @@ var_dump($di->getService('route'));
 echo '<br/>';
 var_dump($di->getService('request'));
 echo '<br/>';
+var_dump($di->getService('requestclered'));
+echo '<br/>';
 var_dump($di->getService('response'));
 echo '<br/>';
 var_dump($di->getService('callsample'));
+echo '<br/>';
+var_dump($di->getService('callsampleclered'));
 echo '</pre>';
+
 
 /*
  * Output:
-object(Phalcon\DI\Service)[52]
+object(Phalcon\DI\Service)[82]
   protected '_name' => string 'route' (length=5)
   protected '_definition' =>
-    object(Closure)[51]
+    object(Closure)[81]
   protected '_shared' => boolean false
   protected '_sharedInstance' => null
 
-object(Phalcon\DI\Service)[54]
+object(Phalcon\DI\Service)[84]
   protected '_name' => string 'request' (length=7)
   protected '_definition' =>
-    object(Service)[59]
+    object(Service)[89]
       protected 'value' => string '22' (length=2)
       protected 'service' =>
-        object(Service)[57]
+        object(Service)[87]
           protected 'value' => string '24' (length=2)
           protected 'service' => null
           protected 'route' => null
       protected 'route' =>
-        object(Phalcon\Mvc\Router)[56]
+        object(Phalcon\Mvc\Router)[86]
           protected '_dependencyInjector' =>
             object(Phalcon\DI\FactoryDefault)[3]
               ...
@@ -78,24 +83,45 @@ object(Phalcon\DI\Service)[54]
   protected '_shared' => boolean false
   protected '_sharedInstance' => null
 
-object(Phalcon\DI\Service)[11]
+object(Phalcon\DI\Service)[83]
+  protected '_name' => string 'requestclered' (length=13)
+  protected '_definition' =>
+    object(Service)[90]
+      protected 'value' => null
+      protected 'service' => null
+      protected 'route' => null
+  protected '_shared' => boolean false
+  protected '_sharedInstance' => null
+
+object(Phalcon\DI\Service)[92]
   protected '_name' => string 'response' (length=8)
   protected '_definition' => string 'Phalcon\Http\Response' (length=21)
   protected '_shared' => boolean true
   protected '_sharedInstance' => null
 
-object(Phalcon\DI\Service)[53]
+object(Phalcon\DI\Service)[79]
   protected '_name' => string 'callsample' (length=10)
   protected '_definition' =>
-    object(CallService)[49]
+    object(CallService)[91]
       protected 'class' =>
-        object(CallService)[62]
+        object(CallService)[94]
           protected 'class' =>
-            object(Phalcon\Mvc\Router)[63]
+            object(Phalcon\Mvc\Router)[95]
               ...
           protected 'var' => string 'Hello Phalcon' (length=13)
       protected 'var' => string '24' (length=2)
   protected '_shared' => boolean false
   protected '_sharedInstance' => null
 
+object(Phalcon\DI\Service)[11]
+  protected '_name' => string 'callsampleclered' (length=16)
+  protected '_definition' =>
+    object(CallService)[93]
+      protected 'class' =>
+        object(CallService)[100]
+          protected 'class' => null
+          protected 'var' => null
+      protected 'var' => string '24' (length=2)
+  protected '_shared' => boolean false
+  protected '_sharedInstance' => null
  */
