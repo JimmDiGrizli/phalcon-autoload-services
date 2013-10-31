@@ -38,9 +38,6 @@ class ArgumentsHelper extends AbstractHelpers
                     case 'service':
                         $array[] = $this->di->get($value);
                         break;
-                    case 'call':
-
-                        break;
                     default:
                         throw new BadArguments(
                             "Argument type '{$name}' is not supported"
