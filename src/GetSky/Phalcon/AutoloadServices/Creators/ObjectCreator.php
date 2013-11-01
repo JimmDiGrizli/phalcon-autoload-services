@@ -50,7 +50,6 @@ class ObjectCreator extends AbstractCreator
             $calls = $callHelper->preparation();
         }
 
-
         if (is_array($arguments)) {
             $reflector = new ReflectionClass($class);
             $object = $reflector->newInstanceArgs($arguments);

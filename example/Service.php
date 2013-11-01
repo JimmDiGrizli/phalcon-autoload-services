@@ -13,7 +13,7 @@ class Service
     public function __construct(
         $value,
         $service = null,
-        Router $route = null
+        $route = null
     ) {
         $this->service = $service;
         $this->value = $value;

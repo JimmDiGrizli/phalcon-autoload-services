@@ -4,7 +4,10 @@ namespace GetSky\Phalcon\AutoloadServices\Creators;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException;
 use
     GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotImplementsException;
+use GetSky\Phalcon\AutoloadServices\Creators\Helpers\ArgumentsHelper;
+use GetSky\Phalcon\AutoloadServices\Creators\Helpers\CallHelper;
 use GetSky\Phalcon\AutoloadServices\Provider;
+use ReflectionClass;
 
 /**
  * Class helps register services in the dependency injection using the
@@ -38,6 +41,31 @@ class ProviderCreator extends AbstractCreator
         if (!$provider instanceof Provider) {
             throw new ClassNotImplementsException("{$class} not implements
             the interface Provider.");
+        }
+
+        $arguments = null;
+        $argConfig = $this->getService()->get('arg', null);
+        if ($argConfig !== null) {
+            $argHelper = new ArgumentsHelper($this->di, $argConfig);
+            $arguments = $argHelper->preparation();
+        }
+
+        $calls = null;
+        $callHelper = null;
+        $callConfig = $this->getService()->get('call', null);
+        if ($callConfig !== null) {
+            $callHelper = new CallHelper($this->di, $callConfig);
+            $calls = $callHelper->preparation();
+        }
+
+        if (is_array($arguments)) {
+            $reflector = new ReflectionClass($provider);
+            $provider = $reflector->newInstanceArgs($arguments);
+        } else {
+            $provider = new $class;
+            if (is_array($calls) && $callHelper !== null) {
+                $callHelper->ring($provider, $calls);
+            }
         }
 
         return $provider->getServices();
