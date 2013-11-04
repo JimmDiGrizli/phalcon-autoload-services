@@ -21,7 +21,7 @@ class Registrant implements InjectionAwareInterface
     protected $di;
 
     /**
-     * @var Config
+     * @var Config|null
      */
     protected $services;
 
@@ -108,6 +108,8 @@ class Registrant implements InjectionAwareInterface
             if ($service !== null) {
                 $this->getDI()->$call($name, $service);
             }
+
+            $this->services = null;
         }
     }
 
