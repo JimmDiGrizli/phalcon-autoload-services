@@ -59,7 +59,6 @@ class ProviderCreator extends AbstractCreator
         }
 
         if (is_array($arguments)) {
-            $reflector = new ReflectionClass($class);
             $provider = $reflector->newInstanceArgs($arguments);
         } else {
             $provider = new $class;
