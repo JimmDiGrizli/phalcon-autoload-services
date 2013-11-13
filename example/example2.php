@@ -34,79 +34,63 @@ echo '</pre>';
 
 /*
  * Output:
-object(Phalcon\DI\Service)[82]
+object(Phalcon\DI\Service)[87]
   protected '_name' => string 'route' (length=5)
   protected '_definition' =>
-    object(Closure)[81]
+    object(Closure)[89]
   protected '_shared' => boolean false
   protected '_sharedInstance' => null
 
-object(Phalcon\DI\Service)[84]
+object(Phalcon\DI\Service)[90]
   protected '_name' => string 'request' (length=7)
   protected '_definition' =>
-    object(Service)[89]
+    object(Service)[91]
       protected 'value' => string '22' (length=2)
       protected 'service' =>
-        object(Service)[87]
+        object(Service)[93]
           protected 'value' => string '24' (length=2)
           protected 'service' => null
           protected 'route' => null
+          protected 'di' => null
       protected 'route' =>
-        object(Phalcon\Mvc\Router)[86]
-          protected '_dependencyInjector' =>
-            object(Phalcon\DI\FactoryDefault)[3]
+        object(Phalcon\Acl\Role)[92]
+          protected '_name' => string '24' (length=2)
+          protected '_description' => null
+      protected 'di' =>
+        object(Phalcon\DI\FactoryDefault)[3]
+          protected '_services' =>
+            array (size=26)
               ...
-          protected '_uriSource' => null
-          protected '_namespace' => null
-          protected '_module' => null
-          protected '_controller' => null
-          protected '_action' => null
-          protected '_params' =>
-            array (size=0)
-              ...
-          protected '_routes' =>
-            array (size=2)
-              ...
-          protected '_matchedRoute' => null
-          protected '_matches' => null
-          protected '_wasMatched' => boolean false
-          protected '_defaultNamespace' => null
-          protected '_defaultModule' => null
-          protected '_defaultController' => null
-          protected '_defaultAction' => null
-          protected '_defaultParams' =>
-            array (size=0)
-              ...
-          protected '_removeExtraSlashes' => null
-          protected '_notFoundPaths' => null
-          protected '_isExactControllerName' => boolean false
+          protected '_sharedInstances' => null
+          protected '_freshInstance' => boolean false
   protected '_shared' => boolean false
   protected '_sharedInstance' => null
 
-object(Phalcon\DI\Service)[83]
+object(Phalcon\DI\Service)[86]
   protected '_name' => string 'requestclered' (length=13)
   protected '_definition' =>
-    object(Service)[90]
+    object(Service)[94]
       protected 'value' => null
       protected 'service' => null
       protected 'route' => null
+      protected 'di' => null
   protected '_shared' => boolean false
   protected '_sharedInstance' => null
 
-object(Phalcon\DI\Service)[92]
+object(Phalcon\DI\Service)[96]
   protected '_name' => string 'response' (length=8)
   protected '_definition' => string 'Phalcon\Http\Response' (length=21)
   protected '_shared' => boolean true
   protected '_sharedInstance' => null
 
-object(Phalcon\DI\Service)[79]
+object(Phalcon\DI\Service)[85]
   protected '_name' => string 'callsample' (length=10)
   protected '_definition' =>
-    object(CallService)[91]
+    object(CallService)[95]
       protected 'class' =>
-        object(CallService)[94]
+        object(CallService)[98]
           protected 'class' =>
-            object(Phalcon\Mvc\Router)[95]
+            object(Phalcon\Acl\Role)[99]
               ...
           protected 'var' => string 'Hello Phalcon' (length=13)
       protected 'var' => string '24' (length=2)
@@ -116,9 +100,9 @@ object(Phalcon\DI\Service)[79]
 object(Phalcon\DI\Service)[11]
   protected '_name' => string 'callsampleclered' (length=16)
   protected '_definition' =>
-    object(CallService)[93]
+    object(CallService)[97]
       protected 'class' =>
-        object(CallService)[100]
+        object(CallService)[102]
           protected 'class' => null
           protected 'var' => null
       protected 'var' => string '24' (length=2)
