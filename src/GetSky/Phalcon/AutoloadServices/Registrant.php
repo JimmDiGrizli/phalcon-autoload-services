@@ -1,12 +1,12 @@
 <?php
 namespace GetSky\Phalcon\AutoloadServices;
 
+use GetSky\Phalcon\AutoloadServices\Creators\AbstractCreator;
 use GetSky\Phalcon\AutoloadServices\Exception\BadTypeException;
 use GetSky\Phalcon\AutoloadServices\Exception\DiNotFoundException;
 use Phalcon\Config;
-use Phalcon\DiInterface;
 use Phalcon\DI\InjectionAwareInterface;
-use GetSky\Phalcon\AutoloadServices\Creators\AbstractCreator;
+use Phalcon\DiInterface;
 
 /**
  * Class Registrant

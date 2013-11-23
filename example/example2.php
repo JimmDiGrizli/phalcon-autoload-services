@@ -6,7 +6,7 @@ require_once 'CallService.php';
 
 use GetSky\Phalcon\AutoloadServices\Registrant;
 use Phalcon\Config\Adapter\Ini;
-use \Phalcon\DI\FactoryDefault;
+use Phalcon\DI\FactoryDefault;
 
 (new \Phalcon\Debug())->listen(true, true);
 

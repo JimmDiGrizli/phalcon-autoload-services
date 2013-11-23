@@ -4,8 +4,8 @@ namespace GetSky\Phalcon\AutoloadServices\Creators;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\ArgumentsHelper;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\CallHelper;
-use ReflectionClass;
 use Phalcon\Config;
+use ReflectionClass;
 
 /**
  * Class helps to prepare the object for registration in the dependency
