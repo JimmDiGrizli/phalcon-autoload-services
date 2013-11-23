@@ -10,13 +10,17 @@ class Service
 
     protected $route;
 
+    protected $di;
+
     public function __construct(
         $value,
         $service = null,
-        $route = null
+        $route = null,
+        $di = null
     ) {
         $this->service = $service;
         $this->value = $value;
         $this->route = $route;
+        $this->di = $di;
     }
 }

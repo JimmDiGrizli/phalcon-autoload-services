@@ -55,9 +55,10 @@ class ObjectCreator extends AbstractCreator
             $object = $reflector->newInstanceArgs($arguments);
         } else {
             $object = new $class;
-            if (is_array($calls) && $callHelper !== null) {
-                $callHelper->ring($object, $calls);
-            }
+        }
+
+        if (is_array($calls) && $callHelper !== null) {
+            $callHelper->ring($object, $calls);
         }
 
         return $object;

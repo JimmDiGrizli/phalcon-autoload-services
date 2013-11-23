@@ -108,9 +108,8 @@ class Registrant implements InjectionAwareInterface
             if ($service !== null) {
                 $this->getDI()->$call($name, $service);
             }
-
-            $this->services = null;
         }
+        $this->services = null;
     }
 
     /**
