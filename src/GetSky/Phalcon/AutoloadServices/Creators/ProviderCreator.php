@@ -37,7 +37,10 @@ class ProviderCreator extends AbstractCreator
 
         $reflector = new ReflectionClass($class);
 
-        if (!$reflector->implementsInterface('GetSky\Phalcon\AutoloadServices\Provider')) {
+        if (!$reflector->implementsInterface(
+            'GetSky\Phalcon\AutoloadServices\Provider'
+        )
+        ) {
             throw new ClassNotImplementsException("{$class} not implements
             the interface Provider.");
         }

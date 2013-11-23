@@ -17,7 +17,6 @@ abstract class AbstractHelpers
      * @var DiInterface Dependency Injectors
      */
     protected $di;
-
     /**
      * @var Config Configuration of the unit
      */
@@ -34,19 +33,19 @@ abstract class AbstractHelpers
     }
 
     /**
-     * @param Config $config
-     */
-    public function setConfig(Config $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
      * @return Config
      */
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * @param Config $config
+     */
+    public function setConfig(Config $config)
+    {
+        $this->config = $config;
     }
 
     /**

@@ -18,7 +18,6 @@ abstract class AbstractCreator
      * @var DiInterface Dependency Injectors
      */
     protected $di;
-
     /**
      * @var Config Service configuration
      */
@@ -35,19 +34,19 @@ abstract class AbstractCreator
     }
 
     /**
-     * @param Config $service
-     */
-    public function setService(Config $service)
-    {
-        $this->service = $service;
-    }
-
-    /**
      * @return Config
      */
     public function getService()
     {
         return $this->service;
+    }
+
+    /**
+     * @param Config $service
+     */
+    public function setService(Config $service)
+    {
+        $this->service = $service;
     }
 
     /**

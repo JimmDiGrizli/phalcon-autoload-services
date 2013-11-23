@@ -19,12 +19,10 @@ class Registrant implements InjectionAwareInterface
      * @var DiInterface
      */
     protected $di;
-
     /**
      * @var Config|null
      */
     protected $services;
-
     /**
      * @var array Array with supported types of services
      */
@@ -39,19 +37,19 @@ class Registrant implements InjectionAwareInterface
     }
 
     /**
-     * @param Config $services
-     */
-    public function setServices(Config $services)
-    {
-        $this->services = $services;
-    }
-
-    /**
      * @return Config
      */
     public function getServices()
     {
         return $this->services;
+    }
+
+    /**
+     * @param Config $services
+     */
+    public function setServices(Config $services)
+    {
+        $this->services = $services;
     }
 
     /**
@@ -62,16 +60,6 @@ class Registrant implements InjectionAwareInterface
     public function setDI($dependencyInjector)
     {
         $this->di = $dependencyInjector;
-    }
-
-    /**
-     * Returns the internal dependency injector
-     *
-     * @return DiInterface
-     */
-    public function getDI()
-    {
-        return $this->di;
     }
 
     /**
@@ -110,6 +98,16 @@ class Registrant implements InjectionAwareInterface
             }
         }
         $this->services = null;
+    }
+
+    /**
+     * Returns the internal dependency injector
+     *
+     * @return DiInterface
+     */
+    public function getDI()
+    {
+        return $this->di;
     }
 
     /**
