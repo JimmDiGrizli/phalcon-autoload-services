@@ -4,8 +4,10 @@ namespace GetSky\Phalcon\AutoloadServices\Tests;
 use GetSky\Phalcon\AutoloadServices\Registrant;
 use Phalcon\Config;
 use Phalcon\Config\Adapter\Ini;
+use PHPUnit_Framework_TestCase;
+use ReflectionClass;
 
-class RegistrantTest extends \PHPUnit_Framework_TestCase
+class RegistrantTest extends PHPUnit_Framework_TestCase
 {
 
     protected $services;
@@ -43,6 +45,22 @@ class RegistrantTest extends \PHPUnit_Framework_TestCase
         $this->registrant->setServices($this->servicesTwo);
         $service = $this->registrant->getServices();
         $this->assertObjectHasAttribute('routeTwo', $service);
+    }
+
+    public function testSupportTypes()
+    {
+        $ref = new ReflectionClass(
+            'GetSky\Phalcon\AutoloadServices\Registrant'
+        );
+
+        $object = $ref->newInstance($this->services);
+        $types = $ref->getProperty('types');
+        $types->setAccessible(true);
+
+        $this->assertSame(
+            ['string', 'object', 'provider'],
+            $types->getValue($object)
+        );
     }
 
     protected function tearDown()
