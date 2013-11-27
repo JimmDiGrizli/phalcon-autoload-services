@@ -41,6 +41,10 @@ class ArgumentsHelper extends AbstractHelpers
                     case 'service':
                         $array[] = $this->di->get($value);
                         break;
+                    case 'shared-service':
+                    case 's-service':
+                        $array[] = $this->di->getShared($value);
+                        break;
                     case 'di':
                         $array[] = $this->di;
                         break;
