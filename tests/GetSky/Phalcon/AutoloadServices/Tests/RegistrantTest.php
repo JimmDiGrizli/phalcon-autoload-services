@@ -7,28 +7,24 @@ use Phalcon\Config\Adapter\Ini;
 use Phalcon\DI\FactoryDefault;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
+use ReflectionMethod;
 
 class RegistrantTest extends PHPUnit_Framework_TestCase
 {
-
+    /**
+     * @var Config
+     */
     protected $services;
-
+    /**
+     * @var Config
+     */
     protected $servicesTwo;
 
     protected $di;
-
     /**
      * @var Registrant
      */
     protected $registrant;
-
-    protected function setUp()
-    {
-        $this->services = new Ini('service.ini');
-        $this->servicesTwo = new Ini('serviceTwo.ini');
-        $this->registrant = new Registrant($this->services);
-        $this->di = new FactoryDefault();
-    }
 
     public function testIsInjectionAwareInterface()
     {
@@ -72,6 +68,48 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
             ['string', 'object', 'provider'],
             $types->getValue($object)
         );
+    }
+
+    /**
+     * @dataProvider providerTypes
+     */
+    public function testFindType($name)
+    {
+
+        $method = new ReflectionMethod(
+            'GetSky\Phalcon\AutoloadServices\Registrant', 'findType'
+        );
+
+        $method->setAccessible(true);
+
+        $this->assertInternalType(
+            'string',
+            $method->invoke(
+                $this->registrant,
+                $this->services->get($name),
+                $name
+            )
+        );
+    }
+
+    public function providerTypes()
+    {
+        return array(
+            array('route'),
+            array('routeclered'),
+            array('request'),
+            array('requestclered'),
+            array('response'),
+            array('responsecleared')
+        );
+    }
+
+    protected function setUp()
+    {
+        $this->services = new Ini('service.ini');
+        $this->servicesTwo = new Ini('serviceTwo.ini');
+        $this->registrant = new Registrant($this->services);
+        $this->di = new FactoryDefault();
     }
 
     protected function tearDown()
