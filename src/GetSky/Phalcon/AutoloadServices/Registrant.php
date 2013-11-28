@@ -79,10 +79,9 @@ class Registrant implements InjectionAwareInterface
 
         foreach ($this->services as $name => $service) {
 
-            $link = null;
             $type = 'GetSky\\Phalcon\\AutoloadServices\\Creators\\' .
                 ucfirst(
-                    $this->findType($service, $link, $name) . 'Creator'
+                    $this->findType($service, $name) . 'Creator'
                 );
 
             $creator = new $type($this->getDI(), $service);
@@ -117,15 +116,17 @@ class Registrant implements InjectionAwareInterface
      * @return mixed
      * @throws BadTypeException
      */
-    protected function findType(Config $service, &$link, $name)
+    protected function findType(Config $service, $name)
     {
-        $link = null;
+
         foreach ($this->types as $type) {
-            $link = $service->get($type, null);
-            if ($link !== null) {
+            if ($service->get($type, null) !== null) {
+
                 return $type;
+
             }
         }
+
         throw new BadTypeException("Incorrect type of service '{$name}'.");
     }
 
