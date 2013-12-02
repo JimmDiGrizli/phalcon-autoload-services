@@ -111,10 +111,9 @@ class Registrant implements InjectionAwareInterface
 
     /**
      * @param Config $service
-     * @param $link
      * @param $name
      * @return mixed
-     * @throws BadTypeException
+     * @throws Exception\BadTypeException
      */
     protected function findType(Config $service, $name)
     {
