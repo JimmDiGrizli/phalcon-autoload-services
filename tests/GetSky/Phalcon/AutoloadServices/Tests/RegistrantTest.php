@@ -1,6 +1,7 @@
 <?php
 namespace GetSky\Phalcon\AutoloadServices\Tests;
 
+use GetSky\Phalcon\AutoloadServices\Exception\BadTypeException;
 use GetSky\Phalcon\AutoloadServices\Registrant;
 use Phalcon\Config;
 use Phalcon\Config\Adapter\Ini;
@@ -88,6 +89,26 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
                 $this->registrant,
                 $this->services->get($name),
                 $name
+            )
+        );
+    }
+    /**
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\BadTypeException
+     */
+    public function testExceptionFindType()
+    {
+        $method = new ReflectionMethod(
+            'GetSky\Phalcon\AutoloadServices\Registrant', 'findType'
+        );
+
+        $method->setAccessible(true);
+
+        $this->assertInternalType(
+            'string',
+            $method->invoke(
+                $this->registrant,
+                $this->services->get('fail'),
+                'fail'
             )
         );
     }
