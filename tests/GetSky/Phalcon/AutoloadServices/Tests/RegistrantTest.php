@@ -1,7 +1,6 @@
 <?php
 namespace GetSky\Phalcon\AutoloadServices\Tests;
 
-use GetSky\Phalcon\AutoloadServices\Exception\BadTypeException;
 use GetSky\Phalcon\AutoloadServices\Registrant;
 use Phalcon\Config;
 use Phalcon\Config\Adapter\Ini;
@@ -78,7 +77,8 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
     {
 
         $method = new ReflectionMethod(
-            'GetSky\Phalcon\AutoloadServices\Registrant', 'findType'
+            'GetSky\Phalcon\AutoloadServices\Registrant',
+            'findType'
         );
 
         $method->setAccessible(true);
@@ -92,13 +92,15 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
     /**
      * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\BadTypeException
      */
     public function testExceptionFindType()
     {
         $method = new ReflectionMethod(
-            'GetSky\Phalcon\AutoloadServices\Registrant', 'findType'
+            'GetSky\Phalcon\AutoloadServices\Registrant',
+            'findType'
         );
 
         $method->setAccessible(true);
@@ -111,6 +113,16 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
                 'fail'
             )
         );
+    }
+
+    /**
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\DiNotFoundException
+     */
+    public function testExceptionRegistration()
+    {
+        $registrant = new Registrant($this->services);
+
+        $registrant->registration();
     }
 
     public function providerTypes()
