@@ -15,12 +15,22 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
      * @var Config
      */
     protected $services;
+
     /**
      * @var Config
      */
     protected $servicesTwo;
 
+    /**
+     * @var Config
+     */
+    protected $servicesFail;
+
+    /**
+     * @var FactoryDefault
+     */
     protected $di;
+
     /**
      * @var Registrant
      */
@@ -109,7 +119,7 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
             'string',
             $method->invoke(
                 $this->registrant,
-                $this->services->get('fail'),
+                $this->servicesFail->get('fail'),
                 'fail'
             )
         );
@@ -123,6 +133,100 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
         $registrant = new Registrant($this->services);
 
         $registrant->registration();
+    }
+
+    public function testRegistrant()
+    {
+        $this->registrant->setDI($this->di);
+        $this->registrant->registration();
+
+        $this->assertNull($this->registrant->getServices());
+
+        $this->assertSame('route', $this->di->getService('route')->getName());
+        $this->assertSame(false, $this->di->getService('route')->isShared());
+        $this->assertInternalType(
+            'object',
+            $this->di->getService('route')->getDefinition()
+        );
+        $this->assertInstanceOf('\Phalcon\Acl\Role',$this->di->get('route'));
+
+        $this->assertSame(
+            'request',
+            $this->di->getService('request')->getName()
+        );
+        $this->assertSame(
+            false,
+            $this->di->getService('request')->isShared()
+        );
+        $this->assertInternalType(
+            'object',
+            $this->di->getService('request')->getDefinition()
+        );
+        $this->assertInstanceOf('Service',$this->di->get('request'));
+
+        $this->assertSame(
+            'requestclered',
+            $this->di->getService('requestclered')->getName()
+        );
+        $this->assertSame(
+            false,
+            $this->di->getService('requestclered')->isShared()
+        );
+        $this->assertInternalType(
+            'object',
+            $this->di->getService('requestclered')->getDefinition()
+        );
+        $this->assertInstanceOf('Service',$this->di->get('requestclered'));
+
+        $this->assertSame(
+            'callsample',
+            $this->di->getService('callsample')->getName()
+        );
+        $this->assertSame(
+            false,
+            $this->di->getService('callsample')->isShared()
+        );
+        $this->assertInternalType(
+            'object',
+            $this->di->getService('callsample')->getDefinition()
+        );
+        $this->assertInstanceOf('CallService',$this->di->get('callsample'));
+
+        $this->assertSame(
+            'callsampleclered',
+            $this->di->getService('callsampleclered')->getName()
+        );
+        $this->assertSame(
+            false,
+            $this->di->getService('callsampleclered')->isShared()
+        );
+        $this->assertInternalType(
+            'object',
+            $this->di->getService('callsampleclered')->getDefinition()
+        );
+        $this->assertInstanceOf(
+            'CallService',
+            $this->di->get('callsampleclered')
+        );
+
+
+        $this->assertSame(
+            'response',
+            $this->di->getService('response')->getName()
+        );
+        $this->assertSame(
+            true,
+            $this->di->getService('response')->isShared()
+        );
+        $this->assertInternalType(
+            'string',
+            $this->di->getService('response')->getDefinition()
+        );
+        $this->assertInstanceOf(
+            'Phalcon\Http\Response',
+            $this->di->get('response')
+        );
+
     }
 
     public function providerTypes()
@@ -141,6 +245,7 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
     {
         $this->services = new Ini('service.ini');
         $this->servicesTwo = new Ini('serviceTwo.ini');
+        $this->servicesFail = new Ini('serviceFail.ini');
         $this->registrant = new Registrant($this->services);
         $this->di = new FactoryDefault();
     }
@@ -149,8 +254,8 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
     {
         $this->services = null;
         $this->servicesTwo = null;
+        $this->servicesFail = null;
         $this->registrant = null;
         $this->di = null;
     }
-
 } 
