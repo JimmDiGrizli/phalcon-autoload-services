@@ -11,6 +11,9 @@ set_include_path(ROOT_PATH . PATH_SEPARATOR . get_include_path());
 
 // required for phalcon/incubator
 include __DIR__ . "/../vendor/autoload.php";
+include __DIR__ . "/../example/RouteProvider.php";
+include __DIR__ . "/../example/CallService.php";
+include __DIR__ . "/../example/Service.php";
 
 // use the application autoloader to autoload the classes
 // autoload the dependencies found in composer
