@@ -9,7 +9,7 @@ use Phalcon\DiInterface;
  * registered in dependency injection.
  *
  * Class AbstractCreator
- * @package GetSky\Phalcon\Bootstrap\Creators
+ * @package GetSky\Phalcon\AutoloadServices\Creators
  */
 abstract class AbstractCreator
 {
