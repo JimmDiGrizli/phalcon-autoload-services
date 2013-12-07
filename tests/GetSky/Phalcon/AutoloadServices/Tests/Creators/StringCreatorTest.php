@@ -7,25 +7,29 @@ use Phalcon\Config;
 class StringCreatorTest extends CreatorTest
 {
 
-    public function providerTypes()
+    public function testCreator()
     {
-        return array(
+        $config = new Config(
             array(
-                array('string' => 'Phalcon\Http\Response',
-                'shared' => 1),
-            ),
-            array(
-                array('string' => '%off%')
+                'string' => 'Phalcon\Http\Response',
+                'shared' => 1
             )
         );
+        $this->creator = new StringCreator($this->di, $config);
+        $this->assertSame('Phalcon\Http\Response',$this->creator->injection());
+
+        $config = new Config(array('string' => '%off%'));
+        $this->creator = new StringCreator($this->di, $config);
+        $this->assertNull($this->creator->injection());
     }
 
     /**
-     * @dataProvider providerTypes
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException
      */
-    public function testCreator($config)
+    public function testClassNotFoundException()
     {
-        $this->creator = new StringCreator($this->di,new Config($config));
+        $config = new Config(array('string' => 'NotClass'));
+        $this->creator = new StringCreator($this->di, $config);
+        $this->creator->injection();
     }
-
 } 
