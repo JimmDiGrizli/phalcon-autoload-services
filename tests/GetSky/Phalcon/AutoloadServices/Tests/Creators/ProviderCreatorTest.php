@@ -8,12 +8,6 @@ class ProviderCreatorTest extends CreatorTest
 {
     public function testCreator()
     {
-        $config = new Config(
-            array(
-                'provider' => 'RouteProvider'
-            )
-        );
-        $this->creator = new ProviderCreator($this->di, $config);
         $this->di->set('testProviderCreator', $this->creator->injection());
         $this->assertInstanceOf(
             'Phalcon\Mvc\Router',
@@ -21,7 +15,7 @@ class ProviderCreatorTest extends CreatorTest
         );
 
         $config = new Config(array('provider' => '%off%'));
-        $this->creator = new ProviderCreator($this->di, $config);
+        $this->creator->setService($config);
         $this->assertNull($this->creator->injection());
     }
 
@@ -31,7 +25,7 @@ class ProviderCreatorTest extends CreatorTest
     public function testClassNotFoundException()
     {
         $config = new Config(array('provider' => 'NotClass'));
-        $this->creator = new ProviderCreator($this->di, $config);
+        $this->creator->setService($config);
         $this->creator->injection();
     }
 
@@ -41,7 +35,18 @@ class ProviderCreatorTest extends CreatorTest
     public function testClassNotImplementsException()
     {
         $config = new Config(array('provider' => 'Phalcon\Config'));
-        $this->creator = new ProviderCreator($this->di, $config);
+        $this->creator->setService($config);
         $this->creator->injection();
+    }
+
+    protected function  setUp()
+    {
+        parent::setUp();
+        $this->services = new Config(
+            array(
+                'provider' => 'RouteProvider'
+            )
+        );
+        $this->creator = new ProviderCreator($this->di, $this->services);
     }
 } 

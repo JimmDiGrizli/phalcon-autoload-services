@@ -9,17 +9,10 @@ class StringCreatorTest extends CreatorTest
 
     public function testCreator()
     {
-        $config = new Config(
-            array(
-                'string' => 'Phalcon\Http\Response',
-                'shared' => 1
-            )
-        );
-        $this->creator = new StringCreator($this->di, $config);
         $this->assertSame('Phalcon\Http\Response',$this->creator->injection());
 
         $config = new Config(array('string' => '%off%'));
-        $this->creator = new StringCreator($this->di, $config);
+        $this->creator->setService($config);
         $this->assertNull($this->creator->injection());
     }
 
@@ -29,7 +22,19 @@ class StringCreatorTest extends CreatorTest
     public function testClassNotFoundException()
     {
         $config = new Config(array('string' => 'NotClass'));
-        $this->creator = new StringCreator($this->di, $config);
+        $this->creator->setService($config);
         $this->creator->injection();
+    }
+
+    protected function  setUp()
+    {
+        parent::setUp();
+        $this->services = new Config(
+            array(
+                'string' => 'Phalcon\Http\Response',
+                'shared' => 1
+            )
+        );
+        $this->creator = new StringCreator($this->di,$this->services);
     }
 } 

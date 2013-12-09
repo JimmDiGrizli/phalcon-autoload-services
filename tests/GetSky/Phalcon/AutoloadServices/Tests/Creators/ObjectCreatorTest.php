@@ -9,7 +9,27 @@ class ObjectCreatorTest extends CreatorTest
 
     public function testCreator()
     {
-        $config = new Config(
+        $this->assertInstanceOf('Service',$this->creator->injection());
+
+        $config = new Config(array('object' => '%off%'));
+        $this->creator->setService($config);
+        $this->assertNull($this->creator->injection());
+    }
+
+    /**
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException
+     */
+    public function testClassNotFoundException()
+    {
+        $config = new Config(array('object' => 'NotClass'));
+        $this->creator->setService($config);
+        $this->creator->injection();
+    }
+
+    protected function  setUp()
+    {
+        parent::setUp();
+        $this->services = new Config(
             array(
                 'object' => 'Service',
                 'arg' => array(
@@ -35,21 +55,6 @@ class ObjectCreatorTest extends CreatorTest
                 )
             )
         );
-        $this->creator = new ObjectCreator($this->di, $config);
-        $this->assertInstanceOf('Service',$this->creator->injection());
-
-        $config = new Config(array('object' => '%off%'));
-        $this->creator = new ObjectCreator($this->di, $config);
-        $this->assertNull($this->creator->injection());
-    }
-
-    /**
-     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException
-     */
-    public function testClassNotFoundException()
-    {
-        $config = new Config(array('object' => 'NotClass'));
-        $this->creator = new ObjectCreator($this->di, $config);
-        $this->creator->injection();
+        $this->creator = new ObjectCreator($this->di, $this->services);
     }
 } 
