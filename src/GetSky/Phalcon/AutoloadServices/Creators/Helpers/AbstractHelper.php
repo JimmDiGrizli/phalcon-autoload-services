@@ -7,10 +7,10 @@ use Phalcon\DiInterface;
 /**
  * Parent class of helpers.
  *
- * Class AbstractHelpers
+ * Class AbstractHelper
  * @package GetSky\Phalcon\AutoloadServices\Creators\Helpers
  */
-abstract class AbstractHelpers
+abstract class AbstractHelper
 {
 
     /**

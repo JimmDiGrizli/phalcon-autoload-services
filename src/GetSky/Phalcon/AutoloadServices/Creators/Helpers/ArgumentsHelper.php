@@ -10,7 +10,7 @@ use GetSky\Phalcon\AutoloadServices\Creators\ObjectCreator;
  * Class ArgumentsHelper
  * @package GetSky\Phalcon\AutoloadServices\Creators\Helpers
  */
-class ArgumentsHelper extends AbstractHelpers
+class ArgumentsHelper extends AbstractHelper
 {
 
     /**

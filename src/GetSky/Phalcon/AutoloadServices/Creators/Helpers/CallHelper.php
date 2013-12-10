@@ -11,7 +11,7 @@ use Phalcon\Config;
  * Class CallHelper
  * @package GetSky\Phalcon\AutoloadServices\Creators\Helpers
  */
-class CallHelper extends AbstractHelpers
+class CallHelper extends AbstractHelper
 {
 
     public function preparation()
