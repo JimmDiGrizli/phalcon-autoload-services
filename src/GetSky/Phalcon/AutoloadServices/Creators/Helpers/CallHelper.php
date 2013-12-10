@@ -42,14 +42,15 @@ class CallHelper extends AbstractHelper
     public function ring($object, array $calls)
     {
         if (!is_object($object)) {
-            throw new ObjectNotFoundException ("{$object} is not an object ");
+            throw new ObjectNotFoundException("{$object} is not an object ");
         }
 
         foreach ($calls as $call) {
             if (!method_exists($object, $call['method'])) {
                 $nameClass = get_class($object);
-                throw new MethodNotFoundException ("{$call['method']} not
-                found in class {$nameClass}");
+                throw new MethodNotFoundException(
+                    "{$call['method']} not found in class {$nameClass}"
+                );
             }
 
             if (is_array($call['arguments'])) {
