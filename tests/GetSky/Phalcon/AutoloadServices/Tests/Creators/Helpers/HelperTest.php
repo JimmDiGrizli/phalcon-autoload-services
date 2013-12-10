@@ -16,11 +16,11 @@ abstract class HelperTest extends PHPUnit_Framework_TestCase
     /**
      * @var AbstractHelper
      */
-    protected $creator = null;
+    protected $helper = null;
     /**
      * @var Config
      */
-    protected $services = null;
+    protected $config = null;
     /**
      * @var DiInterface
      */
