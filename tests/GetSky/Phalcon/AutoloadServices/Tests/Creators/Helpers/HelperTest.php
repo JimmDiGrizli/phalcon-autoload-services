@@ -26,6 +26,14 @@ abstract class HelperTest extends PHPUnit_Framework_TestCase
      */
     protected $di = null;
 
+    public function testSetAndGetConfig()
+    {
+        $save = $this->config;
+        $this->helper->setConfig(new Config(['test' => 'test']));
+        $this->assertArrayHasKey('test', $this->helper->getConfig());
+        $this->services = $save;
+    }
+
     protected function setUp()
     {
         $this->di = new FactoryDefault();
