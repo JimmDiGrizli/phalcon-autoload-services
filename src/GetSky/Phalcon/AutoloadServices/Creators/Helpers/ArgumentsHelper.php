@@ -1,7 +1,7 @@
 <?php
 namespace GetSky\Phalcon\AutoloadServices\Creators\Helpers;
 
-use GetSky\Phalcon\AutoloadServices\Creators\Exception\BadArguments;
+use GetSky\Phalcon\AutoloadServices\Creators\Exception\BadArgumentsException;
 use GetSky\Phalcon\AutoloadServices\Creators\ObjectCreator;
 
 /**
@@ -15,7 +15,7 @@ class ArgumentsHelper extends AbstractHelper
 
     /**
      * @return array|null
-     * @throws \GetSky\Phalcon\AutoloadServices\Creators\Exception\BadArguments
+     * @throws \GetSky\Phalcon\AutoloadServices\Creators\Exception\BadArgumentsException
      */
     public function preparation()
     {
@@ -49,7 +49,7 @@ class ArgumentsHelper extends AbstractHelper
                         $array[] = $this->di;
                         break;
                     default:
-                        throw new BadArguments(
+                        throw new BadArgumentsException(
                             "Argument type '{$name}' is not supported"
                         );
                 }

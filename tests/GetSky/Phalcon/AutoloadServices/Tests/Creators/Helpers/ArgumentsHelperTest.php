@@ -33,7 +33,7 @@ class ArgumentsHelperTest extends HelperTest
     }
 
     /**
-     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\BadArguments
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\BadArgumentsException
      */
     public function testBadArgumentsException()
     {
