@@ -12,7 +12,7 @@ use Phalcon\Config;
 class ArgumentsHelperTest extends HelperTest
 {
 
-    public function  testPreparation()
+    public function testPreparation()
     {
         $params = [
             '0' => 24,
@@ -62,7 +62,7 @@ class ArgumentsHelperTest extends HelperTest
         $this->helper->setConfig($this->config);
     }
 
-    protected function  setUp()
+    protected function setUp()
     {
         parent::setUp();
         $this->config = new Config(
