@@ -2,6 +2,7 @@
 namespace GetSky\Phalcon\AutoloadServices\Creators;
 
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException;
+use GetSky\Phalcon\AutoloadServices\Creators\Exception\MissClassNameException;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\ArgumentsHelper;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\CallHelper;
 use Phalcon\Config;
@@ -22,10 +23,20 @@ class ObjectCreator extends AbstractCreator
     /**
      * @return object|null
      * @throws ClassNotFoundException
+     * @throws MissClassNameException
      */
     public function injection()
     {
         $class = $this->getService()->get('object');
+        if ($class === null) {
+            $class = $this->getService()->get('obj');
+        }
+        if ($class === null) {
+            $class = $this->getService()->get('instance');
+        }
+        if ($class === null) {
+            throw new MissClassNameException("The class name is not defined.");
+        }
 
         if ($class === '%off%') {
             return null;
