@@ -9,9 +9,9 @@ class ObjectCreatorTest extends CreatorTest
 
     public function testCreator()
     {
-        $this->assertInstanceOf('Service',$this->creator->injection());
+        $this->assertInstanceOf('Service', $this->creator->injection());
 
-        $config = new Config(array('object' => '%off%'));
+        $config = new Config(['object' => '%off%']);
         $this->creator->setService($config);
         $this->assertNull($this->creator->injection());
     }
@@ -21,7 +21,7 @@ class ObjectCreatorTest extends CreatorTest
      */
     public function testClassNotFoundException()
     {
-        $config = new Config(array('object' => 'NotClass'));
+        $config = new Config(['object' => 'NotClass']);
         $this->creator->setService($config);
         $this->creator->injection();
     }
@@ -30,30 +30,24 @@ class ObjectCreatorTest extends CreatorTest
     {
         parent::setUp();
         $this->services = new Config(
-            array(
+            [
                 'object' => 'Service',
-                'arg' => array(
-                    '0' => array(
-                        'var' => '24'
-                    ),
-                    '1' => array(
-                        'object' => array(
+                'arg' => [
+                    '0' => ['var' => '24'],
+                    '1' => [
+                        'object' => [
                             'object' => 'Service',
-                            'arg' => array(
-                                '0' => array(
+                            'arg' => [
+                                '0' => [
                                     'parameter' => '24'
-                                ),
-                            )
-                        )
-                    ),
-                    '2' => array(
-                        'service' => 'tag'
-                    ),
-                    '3' => array(
-                        'di' => 1
-                    )
-                )
-            )
+                                ],
+                            ]
+                        ]
+                    ],
+                    '2' => ['service' => 'tag'],
+                    '3' => ['di' => 1]
+                ]
+            ]
         );
         $this->creator = new ObjectCreator($this->di, $this->services);
     }

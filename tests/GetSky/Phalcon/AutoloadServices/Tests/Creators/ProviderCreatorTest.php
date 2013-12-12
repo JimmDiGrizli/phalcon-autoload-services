@@ -14,7 +14,7 @@ class ProviderCreatorTest extends CreatorTest
             $this->di->get('testProviderCreator')
         );
 
-        $config = new Config(array('provider' => '%off%'));
+        $config = new Config(['provider' => '%off%']);
         $this->creator->setService($config);
         $this->assertNull($this->creator->injection());
     }
@@ -24,7 +24,7 @@ class ProviderCreatorTest extends CreatorTest
      */
     public function testClassNotFoundException()
     {
-        $config = new Config(array('provider' => 'NotClass'));
+        $config = new Config(['provider' => 'NotClass']);
         $this->creator->setService($config);
         $this->creator->injection();
     }
@@ -34,7 +34,7 @@ class ProviderCreatorTest extends CreatorTest
      */
     public function testClassNotImplementsException()
     {
-        $config = new Config(array('provider' => 'Phalcon\Config'));
+        $config = new Config(['provider' => 'Phalcon\Config']);
         $this->creator->setService($config);
         $this->creator->injection();
     }

@@ -30,8 +30,8 @@ abstract class CreatorTest extends PHPUnit_Framework_TestCase
     public function testSetAndGetServices()
     {
         $save = $this->services;
-        $this->creator->setService(new Config(array('test' => 'test')));
-        $this->assertArrayHasKey('test',$this->creator->getService());
+        $this->creator->setService(new Config(['test' => 'test']));
+        $this->assertArrayHasKey('test', $this->creator->getService());
         $this->services = $save;
     }
 

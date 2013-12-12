@@ -15,22 +15,18 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
      * @var Config
      */
     protected $services;
-
     /**
      * @var Config
      */
     protected $servicesTwo;
-
     /**
      * @var Config
      */
     protected $servicesFail;
-
     /**
      * @var FactoryDefault
      */
     protected $di;
-
     /**
      * @var Registrant
      */
@@ -148,7 +144,7 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
             'object',
             $this->di->getService('route')->getDefinition()
         );
-        $this->assertInstanceOf('\Phalcon\Acl\Role',$this->di->get('route'));
+        $this->assertInstanceOf('\Phalcon\Acl\Role', $this->di->get('route'));
 
         $this->assertSame(
             'request',
@@ -162,7 +158,7 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
             'object',
             $this->di->getService('request')->getDefinition()
         );
-        $this->assertInstanceOf('Service',$this->di->get('request'));
+        $this->assertInstanceOf('Service', $this->di->get('request'));
 
         $this->assertSame(
             'requestclered',
@@ -176,7 +172,7 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
             'object',
             $this->di->getService('requestclered')->getDefinition()
         );
-        $this->assertInstanceOf('Service',$this->di->get('requestclered'));
+        $this->assertInstanceOf('Service', $this->di->get('requestclered'));
 
         $this->assertSame(
             'callsample',
@@ -190,7 +186,7 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
             'object',
             $this->di->getService('callsample')->getDefinition()
         );
-        $this->assertInstanceOf('CallService',$this->di->get('callsample'));
+        $this->assertInstanceOf('CallService', $this->di->get('callsample'));
 
         $this->assertSame(
             'callsampleclered',
@@ -231,14 +227,14 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
 
     public function providerTypes()
     {
-        return array(
-            array('route'),
-            array('routeclered'),
-            array('request'),
-            array('requestclered'),
-            array('response'),
-            array('responsecleared')
-        );
+        return [
+            ['route'],
+            ['routeclered'],
+            ['request'],
+            ['requestclered'],
+            ['response'],
+            ['responsecleared']
+        ];
     }
 
     protected function setUp()
