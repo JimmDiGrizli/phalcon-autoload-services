@@ -32,6 +32,14 @@ class CallHelperTest extends HelperTest
         $this->assertNull($this->helper->preparation());
     }
 
+    /**
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\ObjectNotFoundException
+     */
+    public function testObjectNotFoundException()
+    {
+        $this->helper->ring('object',array());
+    }
+
     protected function setUp()
     {
         parent::setUp();
