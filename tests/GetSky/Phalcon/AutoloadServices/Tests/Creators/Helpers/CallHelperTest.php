@@ -12,6 +12,11 @@ use Phalcon\Config;
 class CallHelperTest extends HelperTest
 {
 
+    /**
+     * @var CallHelper
+     */
+    protected $helper;
+
     public function testPreparation()
     {
         $arguments = [
