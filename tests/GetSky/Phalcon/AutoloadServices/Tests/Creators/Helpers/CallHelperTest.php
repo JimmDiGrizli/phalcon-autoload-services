@@ -37,7 +37,16 @@ class CallHelperTest extends HelperTest
      */
     public function testObjectNotFoundException()
     {
-        $this->helper->ring('object',array());
+        $this->helper->ring('object', array());
+    }
+
+    /**
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\MethodNotFoundException
+     */
+    public function testMethodNotFoundException()
+    {
+        $object = new CallService();
+        $this->helper->ring($object, [0 => ['method' => 'fail']]);
     }
 
     protected function setUp()
