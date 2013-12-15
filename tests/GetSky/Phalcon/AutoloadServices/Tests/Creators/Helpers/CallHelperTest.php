@@ -37,6 +37,18 @@ class CallHelperTest extends HelperTest
         $this->assertNull($this->helper->preparation());
     }
 
+    public function testRing()
+    {
+        $object = new CallService();
+        $this->helper->ring(
+            $object,
+            [0 => ['method' => 'run', 'arguments' => ['25', 'object']]]
+        );
+        $test = new CallService();
+        $test->run('25','object');
+        $this->assertEquals($test, $object);
+    }
+
     /**
      * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\ObjectNotFoundException
      */
