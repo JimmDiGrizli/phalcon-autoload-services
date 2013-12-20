@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '\..\vendor\autoload.php';
+
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once 'RouteProvider.php';
 require_once 'Service.php';
 require_once 'CallService.php';
