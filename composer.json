@@ -2,7 +2,7 @@
     "name": "getsky/phalcon-autoload-services",
     "type": "library",
     "description": "Components for automatic registration services in Dependency Injection",
-    "keywords": [ "framework", "phalcon", "di", "dependency", "injection" ],
+    "keywords": [ "framework", "phalcon", "di", "dependency injection" ],
     "license": "MIT",
     "authors": [
         {
