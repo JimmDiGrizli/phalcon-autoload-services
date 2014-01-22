@@ -24,8 +24,8 @@
     },
     "minimum-stability": "dev",
     "autoload": {
-        "psr-0": {
-            "GetSky\\Phalcon\\AutoloadServices": "src/"
+        "psr-4": {
+            "GetSky\\Phalcon\\AutoloadServices\\": "src/"
         }
     }
 }
