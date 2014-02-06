@@ -30,4 +30,4 @@ class StringCreator extends AbstractCreator
 
         return $class;
     }
-} 
+}

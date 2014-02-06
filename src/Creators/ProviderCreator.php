@@ -41,8 +41,9 @@ class ProviderCreator extends AbstractCreator
             'GetSky\Phalcon\AutoloadServices\Provider'
         )
         ) {
-            throw new ClassNotImplementsException("{$class} not implements
-            the interface Provider.");
+            throw new ClassNotImplementsException(
+                "{$class} not implements the interface Provider."
+            );
         }
 
         $arguments = null;

@@ -14,4 +14,4 @@ interface Provider
      * @return mixed
      */
     public function getServices();
-} 
+}

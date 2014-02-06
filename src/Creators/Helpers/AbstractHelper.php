@@ -52,5 +52,4 @@ abstract class AbstractHelper
      * @return array
      */
     abstract public function preparation();
-
-} 
+}

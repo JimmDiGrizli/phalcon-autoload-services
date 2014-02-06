@@ -128,5 +128,4 @@ class Registrant implements InjectionAwareInterface
 
         throw new BadTypeException("Incorrect type of service '{$name}'.");
     }
-
 }
