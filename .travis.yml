@@ -1,6 +1,7 @@
 language: php
 
 before_script:
+  - chmod a+x ./tests/install-php-extension.sh
   - ./tests/install-php-extension.sh
   - composer update
 
