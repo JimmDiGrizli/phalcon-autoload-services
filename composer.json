@@ -12,10 +12,12 @@
     ],
     "require": {
         "php": ">=5.4",
-        "ext-phalcon": "*"
+        "ext-phalcon": ">=1.2.4,<2"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "3.7.*",
+        "squizlabs/php_codesniffer": "1.*",
+        "codeception/codeception": "*"
     },
     "extra": {
         "branch-alias": {
