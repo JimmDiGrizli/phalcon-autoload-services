@@ -45,7 +45,7 @@ class CallHelperTest extends HelperTest
             [0 => ['method' => 'run', 'arguments' => ['25', 'object']]]
         );
         $test = new CallService();
-        $test->run('25','object');
+        $test->run('25', 'object');
         $this->assertEquals($test, $object);
     }
 

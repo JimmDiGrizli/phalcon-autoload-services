@@ -1,11 +1,11 @@
 <?php
 namespace GetSky\Phalcon\AutoloadServices\Tests\Creators\Helpers;
 
+use GetSky\Phalcon\AutoloadServices\Creators\Helpers\AbstractHelper;
 use Phalcon\Config;
 use Phalcon\DI\FactoryDefault;
 use Phalcon\DiInterface;
 use PHPUnit_Framework_TestCase;
-use GetSky\Phalcon\AutoloadServices\Creators\Helpers\AbstractHelper;
 
 /**
  * Class HelperTest
@@ -34,6 +34,8 @@ abstract class HelperTest extends PHPUnit_Framework_TestCase
         $this->services = $save;
     }
 
+    abstract public function testPreparation();
+
     protected function setUp()
     {
         $this->di = new FactoryDefault();
@@ -43,6 +45,4 @@ abstract class HelperTest extends PHPUnit_Framework_TestCase
     {
         $this->di = null;
     }
-
-    abstract public function testPreparation();
 }
