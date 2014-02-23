@@ -14,6 +14,9 @@ use Phalcon\Config;
 class CallHelper extends AbstractHelper
 {
 
+    /**
+     * @return null|array
+     */
     public function preparation()
     {
         /** @var $calls Config[] */
@@ -39,6 +42,12 @@ class CallHelper extends AbstractHelper
         return $array;
     }
 
+    /**
+     * @param object $object
+     * @param array $calls
+     * @throws \GetSky\Phalcon\AutoloadServices\Creators\Exception\ObjectNotFoundException
+     * @throws \GetSky\Phalcon\AutoloadServices\Creators\Exception\MethodNotFoundException
+     */
     public function ring($object, array $calls)
     {
         if (!is_object($object)) {
@@ -62,6 +71,5 @@ class CallHelper extends AbstractHelper
                 $object->{$call['method']}();
             }
         }
-
     }
 }
