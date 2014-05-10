@@ -2,7 +2,8 @@
 namespace GetSky\Phalcon\AutoloadServices\Creators;
 
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException;
-use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotImplementsException;
+use
+    GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotImplementsException;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\ArgumentsHelper;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\CallHelper;
 use ReflectionClass;

@@ -53,16 +53,6 @@ class Registrant implements InjectionAwareInterface
     }
 
     /**
-     * Sets the dependency injector
-     *
-     * @param DiInterface $dependencyInjector
-     */
-    public function setDI($dependencyInjector)
-    {
-        $this->di = $dependencyInjector;
-    }
-
-    /**
      * Registration services in the dependency injector
      */
     public function registration()
@@ -110,6 +100,16 @@ class Registrant implements InjectionAwareInterface
     }
 
     /**
+     * Sets the dependency injector
+     *
+     * @param DiInterface $dependencyInjector
+     */
+    public function setDI($dependencyInjector)
+    {
+        $this->di = $dependencyInjector;
+    }
+
+    /**
      * @param Config $service
      * @param $name
      * @return mixed
@@ -117,15 +117,11 @@ class Registrant implements InjectionAwareInterface
      */
     protected function findType(Config $service, $name)
     {
-
         foreach ($this->types as $type) {
             if ($service->get($type, null) !== null) {
-
                 return $type;
-
             }
         }
-
         throw new BadTypeException("Incorrect type of service '{$name}'.");
     }
 }
