@@ -16,6 +16,10 @@ class Registrant implements InjectionAwareInterface
 {
 
     /**
+     * @var array Array with supported types of services
+     */
+    protected static $types = ['string', 'object', 'provider'];
+    /**
      * @var DiInterface
      */
     protected $di;
@@ -23,10 +27,6 @@ class Registrant implements InjectionAwareInterface
      * @var Config|null
      */
     protected $services;
-    /**
-     * @var array Array with supported types of services
-     */
-    protected $types = ['string', 'object', 'provider'];
 
     /**
      * @param Config $services
@@ -117,7 +117,7 @@ class Registrant implements InjectionAwareInterface
      */
     protected function findType(Config $service, $name)
     {
-        foreach ($this->types as $type) {
+        foreach (Registrant::$types as $type) {
             if ($service->get($type, null) !== null) {
                 return $type;
             }
