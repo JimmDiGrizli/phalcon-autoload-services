@@ -5,6 +5,12 @@ use Phalcon\Mvc\Router;
 class RouteProvider implements Provider
 {
     protected $value = null;
+    private $foo = null;
+
+    public  function  __construct($foo = null)
+    {
+        $this->foo = $foo;
+    }
 
     /**
      * @return callable

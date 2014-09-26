@@ -23,4 +23,9 @@ class Service
         $this->route = $route;
         $this->di = $di;
     }
+
+    public function run()
+    {
+
+    }
 }

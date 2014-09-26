@@ -62,7 +62,7 @@ class CallHelper extends AbstractHelper
                 );
             }
 
-            if (is_array($call['arguments'])) {
+            if (isset($call['arguments'])) {
                 call_user_func_array(
                     array($object, $call['method']),
                     $call['arguments']
