@@ -37,6 +37,49 @@ class Registrant implements InjectionAwareInterface
     }
 
     /**
+     * Registration services in the dependency injector
+     */
+    public function registration()
+    {
+        /**
+         * @var Config $settings
+         * @var AbstractCreator $creator
+         */
+        if ($this->getDI() === null) {
+            throw new DiNotFoundException("DI can't be found.");
+        }
+
+        foreach ($this->services as $name => $settings) {
+            $type = $this->findType($settings, $name);
+            $creator = new $type($this->getDI(), $settings);
+            $service = $creator->injection();
+
+            if ($service !== null) {
+                $call = $settings->get('shared') ? 'setShared' : 'set';
+                $this->getDI()->$call($name, $service);
+            }
+        }
+        $this->services = null;
+    }
+
+    /**
+     * @param Config $service
+     * @param $name
+     * @return mixed
+     * @throws Exception\BadTypeException
+     */
+    protected function findType(Config $service, $name)
+    {
+        foreach (Registrant::$types as $type) {
+            if ($service->get($type) !== null) {
+                $namespace = 'GetSky\\Phalcon\\AutoloadServices\\Creators\\';
+                return $namespace . ucfirst($type) . 'Creator';
+            }
+        }
+        throw new BadTypeException("Incorrect type of service '{$name}'.");
+    }
+
+    /**
      * @return Config
      */
     public function getServices()
@@ -50,43 +93,6 @@ class Registrant implements InjectionAwareInterface
     public function setServices(Config $services)
     {
         $this->services = $services;
-    }
-
-    /**
-     * Registration services in the dependency injector
-     */
-    public function registration()
-    {
-        /**
-         * @var Config $service
-         * @var AbstractCreator $creator
-         */
-
-        if ($this->getDI() === null) {
-            throw new DiNotFoundException("DI can't be found.");
-
-        }
-
-        foreach ($this->services as $name => $service) {
-
-            $type = 'GetSky\\Phalcon\\AutoloadServices\\Creators\\' .
-                ucfirst(
-                    $this->findType($service, $name) . 'Creator'
-                );
-
-            $creator = new $type($this->getDI(), $service);
-
-            $call = 'set';
-            if ($service->get('shared') !== null) {
-                $call .= 'Shared';
-            }
-
-            $service = $creator->injection();
-            if ($service !== null) {
-                $this->getDI()->$call($name, $service);
-            }
-        }
-        $this->services = null;
     }
 
     /**
@@ -107,21 +113,5 @@ class Registrant implements InjectionAwareInterface
     public function setDI($dependencyInjector)
     {
         $this->di = $dependencyInjector;
-    }
-
-    /**
-     * @param Config $service
-     * @param $name
-     * @return mixed
-     * @throws Exception\BadTypeException
-     */
-    protected function findType(Config $service, $name)
-    {
-        foreach (Registrant::$types as $type) {
-            if ($service->get($type, null) !== null) {
-                return $type;
-            }
-        }
-        throw new BadTypeException("Incorrect type of service '{$name}'.");
     }
 }
