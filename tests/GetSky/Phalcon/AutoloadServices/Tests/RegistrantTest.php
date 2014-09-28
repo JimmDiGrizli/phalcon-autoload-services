@@ -79,18 +79,18 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerTypes
      */
-    public function testFindType($name)
+    public function testBuildCreator($name)
     {
-
+        $this->registrant->setDI($this->di);
         $method = new ReflectionMethod(
             'GetSky\Phalcon\AutoloadServices\Registrant',
-            'findType'
+            'buildCreator'
         );
 
         $method->setAccessible(true);
 
-        $this->assertInternalType(
-            'string',
+        $this->assertInstanceOf(
+            'GetSky\Phalcon\AutoloadServices\Creators\AbstractCreator',
             $method->invoke(
                 $this->registrant,
                 $this->services->get($name),
@@ -102,17 +102,18 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\BadTypeException
      */
-    public function testExceptionFindType()
+    public function testExceptionBuildCreator()
     {
+        $this->registrant->setDI($this->di);
         $method = new ReflectionMethod(
             'GetSky\Phalcon\AutoloadServices\Registrant',
-            'findType'
+            'buildCreator'
         );
 
         $method->setAccessible(true);
 
-        $this->assertInternalType(
-            'string',
+        $this->assertInstanceOf(
+            'GetSky\Phalcon\AutoloadServices\Creators\AbstractCreator',
             $method->invoke(
                 $this->registrant,
                 $this->servicesFail->get('fail'),

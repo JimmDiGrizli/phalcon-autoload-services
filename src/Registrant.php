@@ -43,15 +43,13 @@ class Registrant implements InjectionAwareInterface
     {
         /**
          * @var Config $settings
-         * @var AbstractCreator $creator
          */
         if ($this->getDI() === null) {
             throw new DiNotFoundException("DI can't be found.");
         }
 
         foreach ($this->services as $name => $settings) {
-            $type = $this->findType($settings, $name);
-            $creator = new $type($this->getDI(), $settings);
+            $creator = $this->buildCreator($settings, $name);
             $service = $creator->injection();
 
             if ($service !== null) {
@@ -65,15 +63,16 @@ class Registrant implements InjectionAwareInterface
     /**
      * @param Config $service
      * @param $name
-     * @return mixed
-     * @throws Exception\BadTypeException
+     * @return AbstractCreator
+     * @throws BadTypeException
      */
-    protected function findType(Config $service, $name)
+    protected function buildCreator(Config $service, $name)
     {
         foreach (Registrant::$types as $type) {
             if ($service->get($type) !== null) {
                 $namespace = 'GetSky\\Phalcon\\AutoloadServices\\Creators\\';
-                return $namespace . ucfirst($type) . 'Creator';
+                $name = $namespace . ucfirst($type) . 'Creator';
+                return new $name($this->getDI(), $service);
             }
         }
         throw new BadTypeException("Incorrect type of service '{$name}'.");
