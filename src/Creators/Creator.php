@@ -7,7 +7,8 @@ use GetSky\Phalcon\AutoloadServices\Exception\BadTypeException;
 use Phalcon\Config;
 use Phalcon\DiInterface;
 
-class Creator {
+class Creator
+{
 
     /**
      * @var array Array with supported types of services
@@ -120,4 +121,4 @@ class Creator {
     {
         $this->di = $di;
     }
-} 
+}
