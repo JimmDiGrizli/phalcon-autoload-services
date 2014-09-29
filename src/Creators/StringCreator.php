@@ -10,7 +10,7 @@ use GetSky\Phalcon\AutoloadServices\Creators\Exception\MissClassNameException;
  * Class StringCreator
  * @package GetSky\Phalcon\AutoloadServices\Creators
  */
-class StringCreator extends AbstractCreator
+class StringCreator extends AbstractCreator implements Injection
 {
 
     /**

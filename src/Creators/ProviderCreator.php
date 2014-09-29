@@ -15,7 +15,7 @@ use ReflectionClass;
  * Class ProviderCreator
  * @package GetSky\Phalcon\AutoloadServices\Creators
  */
-class ProviderCreator extends AbstractCreator
+class ProviderCreator extends AbstractCreator implements Injection
 {
 
     /**
