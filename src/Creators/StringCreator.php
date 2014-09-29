@@ -32,7 +32,7 @@ class StringCreator extends AbstractCreator implements Injection
         }
 
         if (!class_exists($class)) {
-            throw new ClassNotFoundException("{$class} is not not found.");
+            throw new ClassNotFoundException("{$class} is not found.");
         }
 
         return $class;

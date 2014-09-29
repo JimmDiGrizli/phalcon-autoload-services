@@ -40,7 +40,7 @@ class ProviderCreator extends AbstractCreator implements Injection
         }
 
         if (!class_exists($class)) {
-            throw new ClassNotFoundException("{$class} is not not found.");
+            throw new ClassNotFoundException("{$class} is not found.");
         }
 
         $reflector = new ReflectionClass($class);
