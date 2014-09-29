@@ -3,6 +3,7 @@ namespace GetSky\Phalcon\AutoloadServices\Creators;
 
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotImplementsException;
+use GetSky\Phalcon\AutoloadServices\Creators\Exception\MissClassNameException;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\ArgumentsHelper;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\CallHelper;
 use ReflectionClass;
@@ -18,13 +19,21 @@ class ProviderCreator extends AbstractCreator
 {
 
     /**
+     * @throws ClassNotFoundException
+     * @throws ClassNotImplementsException
+     * @throws Exception\BadArgumentsException
+     * @throws Exception\MethodNotFoundException
+     * @throws Exception\ObjectNotFoundException
+     * @throws MissClassNameException
      * @return mixed
-     * @throws Exception\ClassNotImplementsException
-     * @throws Exception\ClassNotFoundException
      */
     public function injection()
     {
         $class = $this->getService()->get('provider');
+
+        if ($class === null) {
+            throw new MissClassNameException("The class name is not defined.");
+        }
 
         if ($class === '%off%') {
             return null;

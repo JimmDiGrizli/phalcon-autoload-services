@@ -28,10 +28,7 @@ class ObjectCreator extends AbstractCreator
     public function injection()
     {
         $service = $this->getService();
-        $class = $service->get(
-            'object',
-            $service->get('obj', $service->get('instance'))
-        );
+        $class = $service->get('object', $service->get('obj', $service->get('instance')));
 
         if ($class === null) {
             throw new MissClassNameException("The class name is not defined.");
