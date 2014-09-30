@@ -18,10 +18,6 @@ class Registrant implements InjectionAwareInterface
 {
 
     /**
-     * @var array Array with supported types of services
-     */
-    protected static $types = ['string', 'object', 'provider'];
-    /**
      * @var DiInterface
      */
     protected $di;
