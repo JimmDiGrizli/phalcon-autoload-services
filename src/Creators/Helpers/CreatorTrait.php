@@ -7,7 +7,8 @@ use ReflectionClass;
 trait CreatorTrait
 {
 
-    public function createObject() {
+    public function createObject()
+    {
         $argumentsHelper = new ArgumentsHelper($this->di, $this->service->get('arg'));
         $callHelper =  new CallHelper($this->di, $this->service->get('call'));
 
@@ -23,4 +24,4 @@ trait CreatorTrait
         }
         return $object;
     }
-} 
+}
