@@ -2,6 +2,8 @@
 namespace GetSky\Phalcon\AutoloadServices;
 
 use GetSky\Phalcon\AutoloadServices\Creators\AbstractCreator;
+use GetSky\Phalcon\AutoloadServices\Creators\AbstractInjection;
+use GetSky\Phalcon\AutoloadServices\Creators\Creator;
 use GetSky\Phalcon\AutoloadServices\Exception\BadTypeException;
 use GetSky\Phalcon\AutoloadServices\Exception\DiNotFoundException;
 use Phalcon\Config;
@@ -48,8 +50,10 @@ class Registrant implements InjectionAwareInterface
             throw new DiNotFoundException("DI can't be found.");
         }
 
+        $creator = new Creator($this->di);
+
         foreach ($this->services as $name => $settings) {
-            $creator = $this->buildCreator($settings, $name);
+            $creator->setService($settings);
             $service = $creator->injection();
 
             if ($service !== null) {
@@ -58,24 +62,6 @@ class Registrant implements InjectionAwareInterface
             }
         }
         $this->services = null;
-    }
-
-    /**
-     * @param Config $service
-     * @param $name
-     * @return AbstractCreator
-     * @throws BadTypeException
-     */
-    protected function buildCreator(Config $service, $name)
-    {
-        foreach (Registrant::$types as $type) {
-            if ($service->get($type) !== null) {
-                $namespace = 'GetSky\\Phalcon\\AutoloadServices\\Creators\\';
-                $name = $namespace . ucfirst($type) . 'Creator';
-                return new $name($this->getDI(), $service);
-            }
-        }
-        throw new BadTypeException("Incorrect type of service '{$name}'.");
     }
 
     /**

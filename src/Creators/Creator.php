@@ -2,10 +2,12 @@
 namespace GetSky\Phalcon\AutoloadServices\Creators;
 
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException;
+use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotImplementsException;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\MissClassNameException;
 use GetSky\Phalcon\AutoloadServices\Exception\BadTypeException;
 use Phalcon\Config;
 use Phalcon\DiInterface;
+use ReflectionClass;
 
 class Creator
 {
@@ -24,15 +26,17 @@ class Creator
      */
     private $service;
     /**
-     * @var Injection
+     * @var AbstractInjection
      */
     private $strategy;
 
-    public function __construct(DiInterface $di, Config $service)
+    /**
+     * @param DiInterface $di
+     * @throws BadTypeException
+     */
+    public function __construct(DiInterface $di)
     {
         $this->di = $di;
-        $this->service = $service;
-        $this->updateStrategy();
     }
 
     /**
@@ -41,31 +45,38 @@ class Creator
      */
     public function injection()
     {
+        if ($this->strategy === null) {
+            return null;
+        }
         return $this->strategy->injection();
     }
 
     public function updateStrategy()
     {
         $select = null;
+        $class = null;
         foreach (Creator::$types as $type) {
+            if ($this->service->get($type) !== null) {
                 $select = $type;
+                $class = $this->service->get($type);
+            }
         }
 
-        if ($this->isCreated($select)) {
+        if ($select !== null && $this->isCreated($select)) {
             switch ($select){
                 case 'object':
                 case 'obj':
                 case 'instance':
-                    $this->strategy = new ObjectCreator($this->di, $this->service);
+                    $this->strategy = new ObjectInjection($this->di, $this->service, $class);
                     break;
                 case 'string':
-                    $this->strategy = new StringCreator($this->di, $this->service);
+                    $this->strategy = new StringInjection($this->di, $this->service, $class);
                     break;
                 case 'provider':
-                    $this->strategy = new ProviderCreator($this->di, $this->service);
+                    $this->strategy = new ProviderInjection($this->di, $this->service, $class);
                     break;
                 default:
-                    throw new BadTypeException("Incorrect type of service.");
+                    throw new BadTypeException("Incorrect type for {$class}.");
             }
         }
     }
@@ -84,6 +95,13 @@ class Creator
 
         if (!class_exists($class)) {
             throw new ClassNotFoundException("{$class} is not not found.");
+        }
+
+        if ($type == 'provider') {
+            $reflector = new ReflectionClass($class);
+            if (!$reflector->implementsInterface('GetSky\Phalcon\AutoloadServices\Provider')) {
+                throw new ClassNotImplementsException("{$class} not implements the interface Provider.");
+            }
         }
 
         return true;

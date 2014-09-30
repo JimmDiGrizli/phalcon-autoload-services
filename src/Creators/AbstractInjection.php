@@ -11,7 +11,7 @@ use Phalcon\DiInterface;
  * Class AbstractCreator
  * @package GetSky\Phalcon\AutoloadServices\Creators
  */
-abstract class AbstractCreator
+abstract class AbstractInjection
 {
 
     /**
@@ -22,31 +22,21 @@ abstract class AbstractCreator
      * @var Config Service configuration
      */
     protected $service;
+    /**
+     * @var string
+     */
+    protected $class;
 
     /**
      * @param DiInterface $di
      * @param Config $service
+     * @param $class
      */
-    public function __construct(DiInterface $di, Config $service)
+    public function __construct(DiInterface $di, Config $service, $class)
     {
         $this->di = $di;
         $this->service = $service;
-    }
-
-    /**
-     * @return Config
-     */
-    public function getService()
-    {
-        return $this->service;
-    }
-
-    /**
-     * @param Config $service
-     */
-    public function setService(Config $service)
-    {
-        $this->service = $service;
+        $this->class = $class;
     }
 
     /**

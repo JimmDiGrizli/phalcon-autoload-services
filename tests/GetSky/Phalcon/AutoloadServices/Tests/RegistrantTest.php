@@ -77,52 +77,6 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider providerTypes
-     */
-    public function testBuildCreator($name)
-    {
-        $this->registrant->setDI($this->di);
-        $method = new ReflectionMethod(
-            'GetSky\Phalcon\AutoloadServices\Registrant',
-            'buildCreator'
-        );
-
-        $method->setAccessible(true);
-
-        $this->assertInstanceOf(
-            'GetSky\Phalcon\AutoloadServices\Creators\AbstractCreator',
-            $method->invoke(
-                $this->registrant,
-                $this->services->get($name),
-                $name
-            )
-        );
-    }
-
-    /**
-     * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\BadTypeException
-     */
-    public function testExceptionBuildCreator()
-    {
-        $this->registrant->setDI($this->di);
-        $method = new ReflectionMethod(
-            'GetSky\Phalcon\AutoloadServices\Registrant',
-            'buildCreator'
-        );
-
-        $method->setAccessible(true);
-
-        $this->assertInstanceOf(
-            'GetSky\Phalcon\AutoloadServices\Creators\AbstractCreator',
-            $method->invoke(
-                $this->registrant,
-                $this->servicesFail->get('fail'),
-                'fail'
-            )
-        );
-    }
-
-    /**
      * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\DiNotFoundException
      */
     public function testExceptionRegistration()

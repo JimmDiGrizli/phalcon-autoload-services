@@ -26,7 +26,7 @@ abstract class AbstractHelper
      * @param DiInterface $di
      * @param Config $config
      */
-    public function __construct(DiInterface $di, Config $config)
+    public function __construct(DiInterface $di, Config $config = null)
     {
         $this->di = $di;
         $this->config = $config;
