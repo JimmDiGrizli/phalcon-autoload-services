@@ -1,13 +1,9 @@
 <?php
 namespace GetSky\Phalcon\AutoloadServices\Creators;
 
-use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException;
-use GetSky\Phalcon\AutoloadServices\Creators\Exception\MissClassNameException;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\ArgumentsHelper;
 use GetSky\Phalcon\AutoloadServices\Creators\Helpers\CallHelper;
-use GetSky\Phalcon\AutoloadServices\Creators\Helpers\CreatorTrait;
 use Phalcon\Config;
-use Phalcon\DiInterface;
 use ReflectionClass;
 
 /**
@@ -21,7 +17,6 @@ use ReflectionClass;
  */
 class ObjectInjection extends AbstractInjection
 {
-    use CreatorTrait;
 
     /**
      * @return object
@@ -29,5 +24,24 @@ class ObjectInjection extends AbstractInjection
     public function injection()
     {
         return $this->createObject();
+    }
+
+    public function createObject()
+    {
+        $argumentsHelper = new ArgumentsHelper($this->di, $this->service->get('arg'));
+        $callHelper = new CallHelper($this->di, $this->service->get('call'));
+
+        if ($arguments = $argumentsHelper->preparation()) {
+            $reflector = new ReflectionClass($this->class);
+            $object = $reflector->newInstanceArgs($arguments);
+        } else {
+            $object = new $this->class;
+        }
+
+        if ($calls = $callHelper->preparation()) {
+            $callHelper->ring($object, $calls);
+        }
+
+        return $object;
     }
 }
