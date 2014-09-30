@@ -60,22 +60,6 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
         $this->assertSame($di, $this->di);
     }
 
-    public function testSupportTypes()
-    {
-        $ref = new ReflectionClass(
-            'GetSky\Phalcon\AutoloadServices\Registrant'
-        );
-
-        $object = $ref->newInstance($this->services);
-        $types = $ref->getProperty('types');
-        $types->setAccessible(true);
-
-        $this->assertSame(
-            ['string', 'object', 'provider'],
-            $types->getValue($object)
-        );
-    }
-
     /**
      * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\DiNotFoundException
      */
