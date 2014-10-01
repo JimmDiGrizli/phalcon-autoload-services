@@ -20,15 +20,15 @@ class Creator
     /**
      * @var DiInterface
      */
-    private $di;
+    protected $di;
     /**
      * @var Config
      */
-    private $service;
+    protected $service;
     /**
      * @var AbstractInjection
      */
-    private $strategy;
+    protected $strategy;
 
     /**
      * @param DiInterface $di
@@ -62,7 +62,11 @@ class Creator
             }
         }
 
-        if ($select !== null && $this->isCreated($select)) {
+        if ($select === null) {
+            throw new BadTypeException("Incorrect type for service");
+        }
+
+        if ($this->isCreated($select)) {
             switch ($select){
                 case 'object':
                 case 'obj':
@@ -75,8 +79,6 @@ class Creator
                 case 'provider':
                     $this->strategy = new ProviderInjection($this->di, $this->service, $class);
                     break;
-                default:
-                    throw new BadTypeException("Incorrect type for {$class}.");
             }
         }
     }
@@ -122,21 +124,5 @@ class Creator
     {
         $this->service = $service;
         $this->updateStrategy();
-    }
-
-    /**
-     * @return DiInterface
-     */
-    public function getDi()
-    {
-        return $this->di;
-    }
-
-    /**
-     * @param DiInterface $di
-     */
-    public function setDi($di)
-    {
-        $this->di = $di;
     }
 }
