@@ -87,7 +87,7 @@ class Creator
     {
         $class = $this->service->get($type);
 
-        if ($class === null) {
+        if ($class == null) {
             throw new MissClassNameException("The class name is not defined.");
         }
 

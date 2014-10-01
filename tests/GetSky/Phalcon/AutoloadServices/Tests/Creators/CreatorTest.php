@@ -47,6 +47,30 @@ class CreatorTest extends PHPUnit_Framework_TestCase
         $this->creator->setService(new Config(['fail'=>'fail']));
     }
 
+    /**
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException
+     */
+    public function testClassNotFoundException()
+    {
+        $this->creator->setService(new Config(['string'=>'Fail']));
+    }
+
+    /**
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\MissClassNameException
+     */
+    public function testMissClassNameException()
+    {
+        $this->creator->setService(new Config(['string'=> '']));
+    }
+
+    /**
+     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotImplementsException
+     */
+    public function testClassNotImplementsException()
+    {
+        $this->creator->setService(new Config(['provider'=> 'Service']));
+    }
+
     public function provider()
     {
         return [
