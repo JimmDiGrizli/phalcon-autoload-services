@@ -5,6 +5,7 @@ use GetSky\Phalcon\AutoloadServices\Creators\Creator;
 use Phalcon\Config;
 use Phalcon\DI\FactoryDefault;
 use PHPUnit_Framework_TestCase;
+use ReflectionProperty;
 
 /**
  * Class CreatorTest
@@ -22,6 +23,30 @@ class CreatorTest extends PHPUnit_Framework_TestCase
     {
         $this->creator->setService(new Config(['string'=>'Service']));
         $this->assertArrayHasKey('string', $this->creator->getService());
+    }
+
+    public function testInjectionNullStrategy()
+    {
+        $this->assertNull($this->creator->injection());
+    }
+
+    public function testInjectionStrategy()
+    {
+        $mock = $this->getMockForAbstractClass(
+            'GetSky\Phalcon\AutoloadServices\Creators\StringInjection',
+            [
+                $this->getMock('Phalcon\DI\FactoryDefault'),
+                $this->getMock('Phalcon\Config'),
+                'Service'
+            ]
+        );
+
+        $properties = new ReflectionProperty($this->creator, 'strategy');
+        $properties->setAccessible(true);
+        $properties->setValue($this->creator, $mock);
+
+        $this->assertEquals('Service',$this->creator->injection());
+
     }
 
     /**

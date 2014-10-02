@@ -51,7 +51,7 @@ class Creator
         return $this->strategy->injection();
     }
 
-    public function updateStrategy()
+    protected function updateStrategy()
     {
         $select = null;
         $class = null;

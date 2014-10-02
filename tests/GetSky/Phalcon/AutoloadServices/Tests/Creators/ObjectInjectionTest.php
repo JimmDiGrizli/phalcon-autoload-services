@@ -8,31 +8,27 @@ use PHPUnit_Framework_TestCase;
 
 class ObjectInjectionTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var ObjectInjection
+     */
+    private $creator;
+
+    public function testExtendsAbstractInjection()
+    {
+        $this->assertInstanceOf(
+            'GetSky\Phalcon\AutoloadServices\Creators\AbstractInjection',
+            $this->creator
+        );
+    }
 
     public function testCreator()
     {
         $this->assertInstanceOf('Service', $this->creator->injection());
-
-        //$config = new Config(['object' => '%off%']);
-        //$this->creator->setService($config);
-        //$this->assertNull($this->creator->injection());
     }
-
-    /**
-     * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException
-
-    public function testClassNotFoundException()
-    {
-        $config = new Config(['object' => 'NotClass']);
-        $this->creator->setService($config);
-        $this->creator->injection();
-    }
-     */
 
     protected function  setUp()
     {
-        parent::setUp();
-        $this->services = new Config(
+        $services = new Config(
             [
                 'object' => 'Service',
                 'arg' => [
@@ -52,6 +48,6 @@ class ObjectInjectionTest extends PHPUnit_Framework_TestCase
                 ]
             ]
         );
-        $this->creator = new ObjectInjection(new FactoryDefault(), $this->services, 'Service');
+        $this->creator = new ObjectInjection(new FactoryDefault(), $services, 'Service');
     }
 } 
