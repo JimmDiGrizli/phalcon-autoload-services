@@ -18,7 +18,11 @@ class ProviderInjection extends AbstractInjection
      */
     public function injection()
     {
-        $object = new ObjectInjection($this->di, $this->service, $this->class);
-        return $object->injection()->getServices();
+        return $this->create()->injection()->getServices();
+    }
+
+    protected function create()
+    {
+        return new ObjectInjection($this->di, $this->service, $this->class);
     }
 }
