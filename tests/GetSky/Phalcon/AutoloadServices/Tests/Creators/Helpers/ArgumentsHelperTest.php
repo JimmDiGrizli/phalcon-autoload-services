@@ -47,7 +47,7 @@ class ArgumentsHelperTest extends HelperTest
 
     /**
      * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\MissClassNameException
-     */
+
     public function testMissClassNameExceptionException()
     {
         $config = new Config(
@@ -61,6 +61,7 @@ class ArgumentsHelperTest extends HelperTest
         $this->helper->preparation();
         $this->helper->setConfig($this->config);
     }
+     */
 
     protected function setUp()
     {

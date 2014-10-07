@@ -60,67 +60,6 @@ class RegistrantTest extends PHPUnit_Framework_TestCase
         $this->assertSame($di, $this->di);
     }
 
-    public function testSupportTypes()
-    {
-        $ref = new ReflectionClass(
-            'GetSky\Phalcon\AutoloadServices\Registrant'
-        );
-
-        $object = $ref->newInstance($this->services);
-        $types = $ref->getProperty('types');
-        $types->setAccessible(true);
-
-        $this->assertSame(
-            ['string', 'object', 'provider'],
-            $types->getValue($object)
-        );
-    }
-
-    /**
-     * @dataProvider providerTypes
-     */
-    public function testFindType($name)
-    {
-
-        $method = new ReflectionMethod(
-            'GetSky\Phalcon\AutoloadServices\Registrant',
-            'findType'
-        );
-
-        $method->setAccessible(true);
-
-        $this->assertInternalType(
-            'string',
-            $method->invoke(
-                $this->registrant,
-                $this->services->get($name),
-                $name
-            )
-        );
-    }
-
-    /**
-     * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\BadTypeException
-     */
-    public function testExceptionFindType()
-    {
-        $method = new ReflectionMethod(
-            'GetSky\Phalcon\AutoloadServices\Registrant',
-            'findType'
-        );
-
-        $method->setAccessible(true);
-
-        $this->assertInternalType(
-            'string',
-            $method->invoke(
-                $this->registrant,
-                $this->servicesFail->get('fail'),
-                'fail'
-            )
-        );
-    }
-
     /**
      * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\DiNotFoundException
      */

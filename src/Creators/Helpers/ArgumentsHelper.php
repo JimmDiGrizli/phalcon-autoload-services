@@ -1,8 +1,10 @@
 <?php
 namespace GetSky\Phalcon\AutoloadServices\Creators\Helpers;
 
+use GetSky\Phalcon\AutoloadServices\Creators\Creator;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\BadArgumentsException;
 use GetSky\Phalcon\AutoloadServices\Creators\ObjectCreator;
+use GetSky\Phalcon\AutoloadServices\Creators\ObjectInjection;
 
 /**
  * Class prepares arguments for transfer to methods or constructor
@@ -19,8 +21,12 @@ class ArgumentsHelper extends AbstractHelper
      */
     public function preparation()
     {
-        $arguments = $this->getConfig();
         $array = null;
+        $arguments = $this->getConfig();
+
+        if ($arguments === null) {
+            return $array;
+        }
 
         foreach ($arguments as $argument) {
             foreach ($argument as $name => $value) {
@@ -35,7 +41,8 @@ class ArgumentsHelper extends AbstractHelper
                     case 'object':
                     case 'obj':
                     case 'instance':
-                        $creator = new ObjectCreator($this->di, $value);
+                        $creator = new Creator($this->di);
+                        $creator->setService($value);
                         $array[] = $creator->injection();
                         break;
                     case 'service':

@@ -23,6 +23,10 @@ class CallHelper extends AbstractHelper
         $calls = $this->getConfig();
         $array = null;
 
+        if ($calls === null) {
+            return $array;
+        }
+
         foreach ($calls as $key => $call) {
 
             if ($call->get('method') === '%off%') {
@@ -62,7 +66,7 @@ class CallHelper extends AbstractHelper
                 );
             }
 
-            if (is_array($call['arguments'])) {
+            if (isset($call['arguments'])) {
                 call_user_func_array(
                     array($object, $call['method']),
                     $call['arguments']

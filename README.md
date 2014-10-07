@@ -1,4 +1,4 @@
-Component for automatic registration of services in DI [![Build Status](https://travis-ci.org/JimmDiGrizli/phalcon-autoload-services.png?branch=develop)](https://travis-ci.org/JimmDiGrizli/phalcon-autoload-services)
+Component for automatic registration of services in DI [![Build Status](https://travis-ci.org/JimmDiGrizli/phalcon-autoload-services.png?branch=develop)](https://travis-ci.org/JimmDiGrizli/phalcon-autoload-services) [![Dependency Status](https://www.versioneye.com/user/projects/537c890514c1580a8600010a/badge.svg)](https://www.versioneye.com/user/projects/537c890514c1580a8600010a)
 ======================================================
 
 This component allows to register services in DI with the settings file.
