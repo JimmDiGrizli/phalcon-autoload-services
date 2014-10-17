@@ -2,7 +2,7 @@
 
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         colors="false"
+         colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
@@ -13,15 +13,13 @@
         >
     <testsuites>
         <testsuite name="AutoloadServices">
-            <directory>./tests/GetSky/Phalcon/AutoloadServices</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
-        <whitelist>
-            <directory suffix=".php">
-                ./tests/GetSky/Phalcon/AutoloadServices
-            </directory>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
         </whitelist>
     </filter>
 </phpunit>
