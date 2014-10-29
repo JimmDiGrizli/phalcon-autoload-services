@@ -76,7 +76,7 @@ arg.4.object.call.0.method = "run"
 ```
 
 In the above example, we register the service ```SomeNamespace\FirstClass``` 
-under the name ```fest-service ``` and pass 5 arguments: the service 
+under the name ```first-service ``` and pass 5 arguments: the service 
 ```config```, variable ```24```, DI (object implements ```DiInterface```),
 service ```shared-services``` caused by the method ``` getShared``` and an
 instance of ```SomeNamespace\SecondClass```, which was first created with
