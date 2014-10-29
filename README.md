@@ -38,19 +38,15 @@ There are three ways to register services:
 constructor or adjust parameters.
     
     ```ini
-    ...
     [response]
     string = "Phalcon\Http\Response"
-    ...  
     ```
     
 2. Registering an instance directly. When using this method the container is 
 placed dependency already finished object.
-    ```php
-    ...
+    ```ini
     [request]
     object = "Phalcon\Http\Response"
-    ...
     ```
 
 3. Through the service provider. Which must implement the interface 
@@ -59,10 +55,8 @@ are intermediaries for registration of anonymous functions in the container
 dependency, but have the opportunity to realize any other way that supports 
 Phalcon.
     ```ini
-    ...
     [route]
     provider = "RouteProvider"
-    ...    
     ```
     
 For the second and third method possible to specify which arguments are passed 
@@ -70,8 +64,8 @@ to the constructor and invoke methods since its inception and prior to placement
 in the DI. Below is an example of how it can be implemented on the ini:
 
 ```ini
-[ferst-service]
-provider = "SomeNamespace\FerstClass"
+[first-service]
+provider = "SomeNamespace\FirstClass"
 arg.0.service = "config"
 arg.1.var = "24"
 arg.2.di = 1
@@ -81,7 +75,7 @@ arg.4.object.arg.0.var = "42"
 arg.4.object.call.0.method = "run"
 ```
 
-In the above example, we register the service ```SomeNamespace\FerstClass``` 
+In the above example, we register the service ```SomeNamespace\FirstClass``` 
 under the name ```fest-service ``` and pass 5 arguments: the service 
 ```config```, variable ```24```, DI (object implements ```DiInterface```),
 service ```shared-services``` caused by the method ``` getShared``` and an
