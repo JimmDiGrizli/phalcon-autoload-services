@@ -65,14 +65,6 @@ class CreatorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \GetSky\Phalcon\AutoloadServices\Exception\BadTypeException
-     */
-    public function testBadTypeException()
-    {
-        $this->creator->setService(new Config(['fail'=>'fail']));
-    }
-
-    /**
      * @expectedException \GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException
      */
     public function testClassNotFoundException()

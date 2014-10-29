@@ -9,7 +9,7 @@ use Phalcon\DiInterface;
 /**
  * Class helps register services in the dependency injection using string.
  *
- * Class StringCreator
+ * Class StringInjection
  * @package GetSky\Phalcon\AutoloadServices\Creators
  */
 class StringInjection extends AbstractInjection

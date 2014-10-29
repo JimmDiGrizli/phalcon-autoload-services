@@ -12,7 +12,7 @@ use ReflectionClass;
  * services) in the constructor and call methods with arguments (objects,
  * variables, services) after creation.
  *
- * Class ObjectCreator
+ * Class ObjectInjection
  * @package GetSky\Phalcon\AutoloadServices\Creators
  */
 class ObjectInjection extends AbstractInjection

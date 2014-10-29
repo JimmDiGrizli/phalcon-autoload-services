@@ -7,7 +7,7 @@ use Phalcon\Config;
  * Class helps register services in the dependency injection using the
  * provider. Service provider can return a string, array, object, or callable.
  *
- * Class ProviderCreator
+ * Class ProviderInjection
  * @package GetSky\Phalcon\AutoloadServices\Creators
  */
 class ProviderInjection extends AbstractInjection

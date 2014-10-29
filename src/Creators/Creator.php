@@ -4,7 +4,6 @@ namespace GetSky\Phalcon\AutoloadServices\Creators;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotFoundException;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\ClassNotImplementsException;
 use GetSky\Phalcon\AutoloadServices\Creators\Exception\MissClassNameException;
-use GetSky\Phalcon\AutoloadServices\Exception\BadTypeException;
 use Phalcon\Config;
 use Phalcon\DiInterface;
 use ReflectionClass;
@@ -32,7 +31,6 @@ class Creator
 
     /**
      * @param DiInterface $di
-     * @throws BadTypeException
      */
     public function __construct(DiInterface $di)
     {
@@ -55,6 +53,9 @@ class Creator
     {
         $select = null;
         $class = null;
+        $isArray = null;
+        $isCreated = true;
+
         foreach (Creator::$types as $type) {
             if ($this->service->get($type) !== null) {
                 $select = $type;
@@ -62,11 +63,11 @@ class Creator
             }
         }
 
-        if ($select === null) {
-            throw new BadTypeException("Incorrect type for service");
+        if ($select !== null) {
+            $isCreated = $this->isCreated($select);
         }
 
-        if ($this->isCreated($select)) {
+        if ($isCreated) {
             switch ($select){
                 case 'object':
                 case 'obj':
@@ -78,6 +79,9 @@ class Creator
                     break;
                 case 'provider':
                     $this->strategy = new ProviderInjection($this->di, $this->service, $class);
+                    break;
+                default:
+                    $this->strategy = new ArrayInjection($this->di, $this->service, $class);
                     break;
             }
         }

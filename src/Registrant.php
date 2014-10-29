@@ -2,9 +2,7 @@
 namespace GetSky\Phalcon\AutoloadServices;
 
 use GetSky\Phalcon\AutoloadServices\Creators\AbstractCreator;
-use GetSky\Phalcon\AutoloadServices\Creators\AbstractInjection;
 use GetSky\Phalcon\AutoloadServices\Creators\Creator;
-use GetSky\Phalcon\AutoloadServices\Exception\BadTypeException;
 use GetSky\Phalcon\AutoloadServices\Exception\DiNotFoundException;
 use Phalcon\Config;
 use Phalcon\DI\InjectionAwareInterface;
