@@ -15,8 +15,8 @@
         "ext-phalcon": ">=1.2.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.3.*",
-        "squizlabs/php_codesniffer": "1.*",
+        "phpunit/phpunit": "4.4.*",
+        "squizlabs/php_codesniffer": "2.*",
         "codeception/codeception": "*"
     },
     "extra": {
