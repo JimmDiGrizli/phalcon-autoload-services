@@ -28,7 +28,6 @@ class CallHelper extends AbstractHelper
         }
 
         foreach ($calls as $key => $call) {
-
             if ($call->get('method') === '%off%') {
                 continue;
             }
